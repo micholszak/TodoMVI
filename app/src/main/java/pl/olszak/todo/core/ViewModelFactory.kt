@@ -1,4 +1,4 @@
-package pl.olszak.todo.common
+package pl.olszak.todo.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ApplicationComponent
-import pl.olszak.todo.common.ViewModelFactory
+import pl.olszak.todo.core.ViewModelFactory
 
 @Module
 @InstallIn(ApplicationComponent::class)
