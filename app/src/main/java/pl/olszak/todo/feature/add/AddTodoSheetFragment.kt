@@ -13,7 +13,7 @@ import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
 
 @AndroidEntryPoint
-class AddTodoFragment : BottomSheetDialogFragment() {
+class AddTodoSheetFragment : BottomSheetDialogFragment() {
 
     private lateinit var title: EditText
 
