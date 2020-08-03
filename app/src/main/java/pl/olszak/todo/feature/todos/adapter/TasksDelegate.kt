@@ -4,8 +4,6 @@ import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import pl.olszak.todo.R
 import pl.olszak.todo.core.adapter.AdapterItem
-import pl.olszak.todo.core.animation.ScaleAnimation
-import pl.olszak.todo.core.animation.animateWith
 import pl.olszak.todo.domain.repository.Task
 
 fun createTaskDelegate() =
@@ -16,6 +14,5 @@ fun createTaskDelegate() =
         bind {
             title.text = item.title
             description.text = item.description
-            itemView.animateWith(ScaleAnimation())
         }
     }

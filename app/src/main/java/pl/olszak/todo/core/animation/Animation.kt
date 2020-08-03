@@ -32,4 +32,4 @@ class ScaleAnimation(
     }
 }
 
-fun View.animateWith(animation: Animation) = animation.animate(this)
+fun View.animateWith(animation: Animation?) = animation?.animate(this)

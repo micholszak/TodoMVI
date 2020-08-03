@@ -4,5 +4,5 @@
     <size
         android:width="@dimen/icon_size"
         android:height="@dimen/icon_size" />
-    <solid android:color="@color/colorPrimary" />
+    <solid android:color="?attr/colorPrimary" />
 </shape>
