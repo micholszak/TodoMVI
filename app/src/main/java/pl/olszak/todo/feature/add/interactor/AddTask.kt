@@ -23,16 +23,12 @@ class AddTask @Inject constructor(
 
     private fun attemptToAddTask(task: Task): Completable =
         Completable.create { emitter ->
-            try {
-                val entity = TaskEntity(
-                    priority = task.priority,
-                    description = task.description,
-                    title = task.title
-                )
-                taskDao.insertTask(entity)
-                emitter.onComplete()
-            } catch (throwable: Throwable) {
-                emitter.onError(throwable)
-            }
+            val entity = TaskEntity(
+                priority = task.priority,
+                description = task.description,
+                title = task.title
+            )
+            taskDao.insertTask(entity)
+            emitter.onComplete()
         }
 }
