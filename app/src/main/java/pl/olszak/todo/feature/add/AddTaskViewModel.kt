@@ -39,9 +39,11 @@ class AddTaskViewModel @ViewModelInject constructor(
         compositeDisposable +=
             taskIntent.compose(processor.intentProcessor)
                 .scan<AddViewState>(AddViewState(), reducer)
-                .subscribeBy(onNext = { state ->
-                    mutableViewState.postValue(state)
-                })
+                .subscribeBy(
+                    onNext = { state ->
+                        mutableViewState.postValue(state)
+                    }
+                )
     }
 
     override fun onCleared() {

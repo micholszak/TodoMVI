@@ -5,8 +5,8 @@ import com.nhaarman.mockitokotlin2.verify
 import org.junit.Test
 import pl.olszak.todo.core.TestSchedulersProvider
 import pl.olszak.todo.domain.database.TaskDao
-import pl.olszak.todo.domain.database.model.TaskEntity
 import pl.olszak.todo.domain.database.model.Priority
+import pl.olszak.todo.domain.database.model.TaskEntity
 import pl.olszak.todo.feature.model.Task
 
 class AddTaskTest {

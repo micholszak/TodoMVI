@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jakewharton.rxbinding3.view.clicks
-import com.jakewharton.rxbinding3.widget.textChanges
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import pl.olszak.todo.R

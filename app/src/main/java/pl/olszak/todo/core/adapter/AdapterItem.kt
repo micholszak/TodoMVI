@@ -6,4 +6,3 @@ interface AdapterItem {
 
     fun areContentsTheSame(other: AdapterItem): Boolean
 }
-
