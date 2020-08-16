@@ -1,4 +1,4 @@
-package pl.olszak.todo.domain.repository
+package pl.olszak.todo.domain.database.model
 
 enum class Priority {
     HIGH,

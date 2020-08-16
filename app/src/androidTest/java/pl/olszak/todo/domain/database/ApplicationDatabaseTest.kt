@@ -5,6 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
+import pl.olszak.todo.domain.database.model.TaskEntity
 
 class ApplicationDatabaseTest {
 
@@ -23,7 +24,8 @@ class ApplicationDatabaseTest {
 
     @Test
     fun testTaskInsertion() {
-        val entity = TaskEntity(title = "something")
+        val entity =
+            TaskEntity(title = "something")
         taskDao.insertTask(entity)
         val testObserver = taskDao.getAllTasks().test()
         val result = testObserver.values().last()
@@ -32,8 +34,8 @@ class ApplicationDatabaseTest {
 
     @Test
     fun taskAutoIncrementationTest() {
-        val entities = List(5) { index ->
-            TaskEntity(title = "title$index")
+        val entities = List(5) {
+            TaskEntity(title = "title")
         }
         entities.forEach { entity ->
             taskDao.insertTask(entity)

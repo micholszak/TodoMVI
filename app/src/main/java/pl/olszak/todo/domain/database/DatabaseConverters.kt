@@ -1,9 +1,9 @@
 package pl.olszak.todo.domain.database
 
 import androidx.room.TypeConverter
-import pl.olszak.todo.domain.repository.Priority
+import pl.olszak.todo.domain.database.model.Priority
 
-object Converters {
+object DatabaseConverters {
 
     @JvmStatic
     @TypeConverter

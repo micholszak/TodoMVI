@@ -4,7 +4,7 @@ import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import pl.olszak.todo.R
 import pl.olszak.todo.core.adapter.AdapterItem
-import pl.olszak.todo.domain.repository.Task
+import pl.olszak.todo.feature.model.Task
 
 fun createTaskDelegate() =
     adapterDelegate<Task, AdapterItem>(R.layout.view_holder_task) {

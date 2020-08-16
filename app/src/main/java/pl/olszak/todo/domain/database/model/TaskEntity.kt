@@ -1,8 +1,7 @@
-package pl.olszak.todo.domain.database
+package pl.olszak.todo.domain.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import pl.olszak.todo.domain.repository.Priority
 
 @Entity(tableName = "tasks")
 data class TaskEntity(

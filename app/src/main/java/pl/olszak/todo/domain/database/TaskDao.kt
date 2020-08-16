@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import io.reactivex.Single
+import pl.olszak.todo.domain.database.model.TaskEntity
 
 @Dao
 interface TaskDao {

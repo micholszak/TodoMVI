@@ -19,8 +19,8 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import pl.olszak.todo.R
 import pl.olszak.todo.core.adapter.ItemAdapter
 import pl.olszak.todo.core.animation.ScaleAnimation
-import pl.olszak.todo.domain.repository.Priority
-import pl.olszak.todo.domain.repository.Task
+import pl.olszak.todo.domain.database.model.Priority
+import pl.olszak.todo.feature.model.Task
 import pl.olszak.todo.feature.todos.adapter.createTaskDelegate
 import java.util.concurrent.TimeUnit
 
