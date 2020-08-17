@@ -12,7 +12,7 @@ class AddTaskProcessor @Inject constructor(private val addTask: AddTask) {
         ObservableTransformer { observableIntent ->
             observableIntent.switchMap { intent ->
                 when (intent) {
-                    is AddTaskIntent.ProcessTask -> addTaskWith((intent.taskTitle))
+                    is AddTaskIntent.ProcessTask -> addTaskWith(intent.taskTitle)
                 }
             }
         }
