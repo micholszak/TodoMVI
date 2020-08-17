@@ -19,8 +19,7 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import pl.olszak.todo.R
 import pl.olszak.todo.core.adapter.ItemAdapter
 import pl.olszak.todo.core.animation.ScaleAnimation
-import pl.olszak.todo.domain.database.model.Priority
-import pl.olszak.todo.feature.model.Task
+import pl.olszak.todo.feature.todos.adapter.TaskViewItem
 import pl.olszak.todo.feature.todos.adapter.createTaskDelegate
 import java.util.concurrent.TimeUnit
 
@@ -69,10 +68,9 @@ class TodoListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val list = List(30) { index ->
-            Task(
+            TaskViewItem(
                 title = "title$index",
-                description = "description$index",
-                priority = Priority.LOW
+                description = "description$index"
             )
         }
 

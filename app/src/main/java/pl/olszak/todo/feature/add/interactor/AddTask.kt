@@ -4,7 +4,7 @@ import io.reactivex.Completable
 import pl.olszak.todo.core.SchedulersProvider
 import pl.olszak.todo.domain.database.TaskDao
 import pl.olszak.todo.domain.database.model.TaskEntity
-import pl.olszak.todo.feature.model.Task
+import pl.olszak.todo.feature.data.Task
 import javax.inject.Inject
 
 class AddTask @Inject constructor(

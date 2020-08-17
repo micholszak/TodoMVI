@@ -11,7 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 import pl.olszak.todo.core.emissions
 import pl.olszak.todo.feature.add.interactor.AddTask
-import pl.olszak.todo.feature.model.Task
+import pl.olszak.todo.feature.data.Task
 
 class AddTaskViewModelTest {
 
