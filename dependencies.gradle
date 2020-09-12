@@ -1,7 +1,8 @@
 ext {
     kotlin_version = '1.4.0'
+    kotlin_plugin_version = '1.4.10'
     detect_version = '1.11.0'
-    dependency_version = '0.29.0'
+    dependency_version = '0.31.0'
     lifecycle_version = "2.2.0"
     nav_version = "2.3.0"
     room_version = "2.2.5"
@@ -11,7 +12,7 @@ ext {
 
     projectPlugins = [
             "com.android.tools.build:gradle:4.0.1",
-            "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
+            "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_plugin_version",
             "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     ]
 
@@ -50,7 +51,7 @@ ext {
 
     viewExtensionDependencies = [
             "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0",
-            "jp.wasabeef:recyclerview-animators:3.0.0"
+            "jp.wasabeef:recyclerview-animators:4.0.1"
     ]
 
     reactiveDependencies = [
@@ -62,7 +63,7 @@ ext {
     androidxCoreDependencies = [
             "androidx.core:core-ktx:1.3.1",
             "androidx.appcompat:appcompat:1.2.0",
-            "androidx.constraintlayout:constraintlayout:1.1.3"
+            "androidx.constraintlayout:constraintlayout:2.0.1"
     ]
 
     testDependencies = [
@@ -75,8 +76,8 @@ ext {
 
     androidTestDependencies = [
             "com.google.truth:truth:1.0.1",
-            "androidx.test.ext:junit:1.1.1",
-            "androidx.test.espresso:espresso-core:3.2.0"
+            "androidx.test.ext:junit:1.1.2",
+            "androidx.test.espresso:espresso-core:3.3.0"
     ]
 
     coreDesugaring = "com.android.tools:desugar_jdk_libs:1.0.10"
