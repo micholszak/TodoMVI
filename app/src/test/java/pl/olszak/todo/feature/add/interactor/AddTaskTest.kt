@@ -2,7 +2,7 @@ package pl.olszak.todo.feature.add.interactor
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import pl.olszak.todo.core.TestSchedulersProvider
 import pl.olszak.todo.domain.database.TaskDao
 import pl.olszak.todo.domain.database.model.Priority

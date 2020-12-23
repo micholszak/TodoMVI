@@ -1,27 +1,25 @@
 package pl.olszak.todo.feature.add
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import pl.olszak.todo.core.InstantTaskExecutionExtension
 import pl.olszak.todo.core.emissions
 import pl.olszak.todo.feature.add.interactor.AddTask
 import pl.olszak.todo.feature.data.Task
 
+@ExtendWith(InstantTaskExecutionExtension::class)
 class AddTaskViewModelTest {
-
-    @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val mockAddTask: AddTask = mock()
     private lateinit var addTaskViewModel: AddTaskViewModel
 
-    @Before
+    @BeforeEach
     fun setUp() {
         addTaskViewModel = AddTaskViewModel(processor = AddTaskProcessor(mockAddTask))
     }
