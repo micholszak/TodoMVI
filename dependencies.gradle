@@ -1,6 +1,6 @@
 ext {
     kotlin_version = '1.4.21'
-    kotlin_plugin_version = '1.4.21'
+    kotlin_plugin_version = '1.4.21-2'
     detect_version = '1.15.0'
     dependency_version = '0.36.0'
     lifecycle_version = "2.2.0"
