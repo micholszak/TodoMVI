@@ -18,8 +18,5 @@ class AddTaskProcessor @Inject constructor(private val addTask: AddTask) {
         }
 
     private fun addTaskWith(title: String): Observable<AddTaskResult> =
-        addTask.execute(Task(title = title))
-            .andThen(Observable.just<AddTaskResult>(AddTaskResult.Added))
-            .startWith(AddTaskResult.Pending)
-            .onErrorReturn { AddTaskResult.Failure }
+        TODO()
 }

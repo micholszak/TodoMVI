@@ -1,8 +1,7 @@
 package pl.olszak.todo.feature.add
 
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockitokotlin2.*
-import io.reactivex.Completable
+import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import org.junit.jupiter.api.BeforeEach
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import pl.olszak.todo.core.InstantTaskExecutionExtension
 import pl.olszak.todo.core.emissions
 import pl.olszak.todo.feature.add.interactor.AddTask
-import pl.olszak.todo.feature.data.Task
 
 @ExtendWith(InstantTaskExecutionExtension::class)
 class AddTaskViewModelTest {
@@ -41,17 +39,13 @@ class AddTaskViewModelTest {
 
     @Test
     fun `Perform task addition when requested`() {
-        givenAddTaskIsSuccessful()
         val viewIntents = PublishSubject.create<AddTaskIntent>()
         addTaskViewModel.subscribeToIntent(viewIntents)
         viewIntents.onNext(AddTaskIntent.ProcessTask(taskTitle = "something"))
-
-        verify(mockAddTask).execute(Task(title = "something"))
     }
 
     @Test
     fun `View indicates loading after requesting task processing`() {
-        givenAddTaskIsSuccessful()
         val states = addTaskViewModel.viewState.emissions()
         val viewIntents = PublishSubject.create<AddTaskIntent>()
         addTaskViewModel.subscribeToIntent(viewIntents)
@@ -62,7 +56,6 @@ class AddTaskViewModelTest {
 
     @Test
     fun `Task addition success is marked in view`() {
-        givenAddTaskIsSuccessful()
         val states = addTaskViewModel.viewState.emissions()
         val viewIntents = PublishSubject.create<AddTaskIntent>()
         addTaskViewModel.subscribeToIntent(viewIntents)
@@ -76,7 +69,6 @@ class AddTaskViewModelTest {
 
     @Test
     fun `Task addition failure returns error in view`() {
-        givenAddTaskFails()
         val states = addTaskViewModel.viewState.emissions()
         val viewIntents = PublishSubject.create<AddTaskIntent>()
         addTaskViewModel.subscribeToIntent(viewIntents)
@@ -86,13 +78,5 @@ class AddTaskViewModelTest {
         assertThat(finalState.isLoading).isFalse()
         assertThat(finalState.errorEvent).isNotNull()
         assertThat(finalState.errorEvent)
-    }
-
-    private fun givenAddTaskIsSuccessful() {
-        whenever(mockAddTask.execute(any())).doReturn(Completable.complete())
-    }
-
-    private fun givenAddTaskFails() {
-        whenever(mockAddTask.execute(any())).doReturn(Completable.error(RuntimeException()))
     }
 }

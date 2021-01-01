@@ -51,6 +51,7 @@ dependencies {
     kapt roomCompiler
 
     implementation reactiveDependencies
+    implementation coroutineDependencies
 
     implementation hiltAndroidDependencies
     kapt hiltCompilers
