@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import pl.olszak.todo.core.InstantTaskExecutionExtension
-import pl.olszak.todo.core.emissions
 import pl.olszak.todo.feature.add.interactor.AddTask
 
 @ExtendWith(InstantTaskExecutionExtension::class)

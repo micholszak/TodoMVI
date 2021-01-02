@@ -1,6 +1,6 @@
 package pl.olszak.todo.core
 
-typealias Reducer<S, R> = (currentState: S, result: R) -> S
+typealias Reducer<S, R> = suspend (currentState: S, result: R) -> S
 
 interface Intention
 
