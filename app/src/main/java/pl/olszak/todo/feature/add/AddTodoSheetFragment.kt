@@ -13,12 +13,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
 import pl.olszak.todo.R
+import pl.olszak.todo.core.clicks
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
-import pl.olszak.todo.core.clicks
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -50,9 +54,11 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
         addTaskViewModel.subscribeToIntent(taskIntent)
         addTaskViewModel.viewState.onEach { state ->
             render(state)
-        }.launchIn(lifecycleScope + CoroutineExceptionHandler { coroutineContext, throwable ->
-            Timber.e(throwable)
-        })
+        }.launchIn(
+            scope = lifecycleScope + CoroutineExceptionHandler { _, throwable ->
+                Timber.e(throwable)
+            }
+        )
         title.showSoftInputInDialog()
     }
 

@@ -5,7 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.plus
 import pl.olszak.todo.core.Reducer
 import pl.olszak.todo.core.ViewStateEvent
@@ -45,7 +50,7 @@ class AddTaskViewModel @ViewModelInject constructor(private val addTask: AddTask
                         try {
                             addTask.execute(task)
                             emit(AddTaskResult.Added)
-                        } catch (e: Exception) {
+                        } catch (e: IllegalArgumentException) {
                             emit(AddTaskResult.Failure)
                         }
                     }
@@ -55,8 +60,11 @@ class AddTaskViewModel @ViewModelInject constructor(private val addTask: AddTask
             .onEach { newState ->
                 mutableState.value = newState
             }
-            .shareIn(scope = viewModelScope + CoroutineExceptionHandler { _, throwable ->
-                Timber.e(throwable)
-            }, started = SharingStarted.Eagerly)
+            .shareIn(
+                scope = viewModelScope + CoroutineExceptionHandler { _, throwable ->
+                    Timber.e(throwable)
+                },
+                started = SharingStarted.Eagerly
+            )
     }
 }
