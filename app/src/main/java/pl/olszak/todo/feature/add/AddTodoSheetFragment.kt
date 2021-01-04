@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.debounce
@@ -36,6 +37,7 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
 
     private lateinit var title: EditText
     private lateinit var createButton: Button
+    @FlowPreview
     private val taskIntent: Flow<AddTaskIntent> by lazy {
         addTaskIntent()
     }
@@ -47,22 +49,23 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
     ): View? =
         inflater.inflate(R.layout.fragment_add_todo_sheet, container, false)
 
+    @FlowPreview
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         title = view.findViewById(R.id.title)
         createButton = view.findViewById(R.id.create)
         addTaskViewModel.subscribeToIntent(taskIntent)
-        addTaskViewModel.viewState.onEach { state ->
-            render(state)
-        }.launchIn(
-            scope = lifecycleScope + CoroutineExceptionHandler { _, throwable ->
-                Timber.e(throwable)
-            }
-        )
+            .onEach(::render)
+            .launchIn(
+                scope = lifecycleScope + CoroutineExceptionHandler { _, throwable ->
+                    Timber.e(throwable)
+                }
+            )
         title.showSoftInputInDialog()
     }
 
-    @OptIn(FlowPreview::class)
+    @FlowPreview
     private fun addTaskIntent(): Flow<AddTaskIntent> =
         createButton.clicks()
             .debounce(THROTTLE_INTERVAL_MS)
