@@ -1,4 +1,4 @@
-package pl.olszak.todo.feature.add
+package pl.olszak.todo.feature.addition.view
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -24,6 +24,10 @@ import pl.olszak.todo.R
 import pl.olszak.todo.core.clicks
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
+import pl.olszak.todo.feature.addition.AddTaskViewModel
+import pl.olszak.todo.feature.addition.model.AddTaskIntent
+import pl.olszak.todo.feature.addition.model.AddViewState
+import pl.olszak.todo.feature.addition.model.FieldError
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -37,10 +41,6 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
 
     private lateinit var title: EditText
     private lateinit var createButton: Button
-    @FlowPreview
-    private val taskIntent: Flow<AddTaskIntent> by lazy {
-        addTaskIntent()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,8 +54,8 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         title = view.findViewById(R.id.title)
-        createButton = view.findViewById(R.id.create)
-        addTaskViewModel.subscribeToIntent(taskIntent)
+        createButton = view.findViewById(R.id.createButton)
+        addTaskViewModel.subscribeToIntent(prepareIntent())
             .onEach(::render)
             .launchIn(
                 scope = lifecycleScope + CoroutineExceptionHandler { _, throwable ->
@@ -66,7 +66,7 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
     }
 
     @FlowPreview
-    private fun addTaskIntent(): Flow<AddTaskIntent> =
+    private fun prepareIntent(): Flow<AddTaskIntent> =
         createButton.clicks()
             .debounce(THROTTLE_INTERVAL_MS)
             .map {

@@ -1,4 +1,4 @@
-package pl.olszak.todo.feature.add.interactor
+package pl.olszak.todo.feature.addition.interactor
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

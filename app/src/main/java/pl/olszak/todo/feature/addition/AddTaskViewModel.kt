@@ -1,4 +1,4 @@
-package pl.olszak.todo.feature.add
+package pl.olszak.todo.feature.addition
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -9,6 +9,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
@@ -18,13 +19,19 @@ import kotlinx.coroutines.plus
 import pl.olszak.todo.core.IntentProcessor
 import pl.olszak.todo.core.Reducer
 import pl.olszak.todo.core.ViewStateEvent
-import pl.olszak.todo.feature.add.interactor.AddTask
+import pl.olszak.todo.feature.addition.interactor.AddTask
+import pl.olszak.todo.feature.addition.model.AddTaskIntent
+import pl.olszak.todo.feature.addition.model.AddTaskResult
+import pl.olszak.todo.feature.addition.model.AddViewState
+import pl.olszak.todo.feature.addition.model.FieldError
 import pl.olszak.todo.feature.data.Task
 import timber.log.Timber
 
-class AddTaskViewModel @ViewModelInject constructor(private val addTask: AddTask) : ViewModel() {
+class AddTaskViewModel @ViewModelInject constructor(
+    private val addTask: AddTask
+) : ViewModel() {
 
-    private val mutableState: MutableStateFlow<AddViewState> = MutableStateFlow(AddViewState())
+    private var mutableState: MutableStateFlow<AddViewState> = MutableStateFlow(AddViewState())
 
     private val reducer: Reducer<AddViewState, AddTaskResult> = { previous, result ->
         when (result) {
@@ -60,7 +67,7 @@ class AddTaskViewModel @ViewModelInject constructor(private val addTask: AddTask
                 scope = viewModelScope + CoroutineExceptionHandler { _, throwable ->
                     Timber.e(throwable)
                 },
-                started = SharingStarted.Eagerly
+                started = SharingStarted.WhileSubscribed()
             )
         return mutableState
     }
@@ -68,11 +75,7 @@ class AddTaskViewModel @ViewModelInject constructor(private val addTask: AddTask
     private fun addTaskToStore(title: String): Flow<AddTaskResult> = flow {
         emit(AddTaskResult.Pending)
         val task = Task(title = title)
-        try {
-            addTask.execute(task)
-            emit(AddTaskResult.Added)
-        } catch (e: IllegalArgumentException) {
-            emit(AddTaskResult.Failure)
-        }
-    }
+        addTask.execute(task)
+        emit(AddTaskResult.Added)
+    }.catch { emit(AddTaskResult.Failure) }
 }

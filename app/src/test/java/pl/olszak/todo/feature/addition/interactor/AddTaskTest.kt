@@ -1,4 +1,4 @@
-package pl.olszak.todo.feature.add.interactor
+package pl.olszak.todo.feature.addition.interactor
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
