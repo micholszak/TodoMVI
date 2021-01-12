@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flowOf
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import pl.olszak.todo.core.CoroutinesTestExtension
+import pl.olszak.todo.core.concurrent.CoroutinesTestExtension
 import pl.olszak.todo.feature.addition.interactor.AddTask
 import pl.olszak.todo.feature.addition.model.AddTaskIntent
 import pl.olszak.todo.feature.addition.model.AddViewState

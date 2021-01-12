@@ -1,4 +1,4 @@
-package pl.olszak.todo.core.concurrent
+package pl.olszak.todo.core.concurrent.extension
 
 import android.view.View
 import kotlinx.coroutines.channels.awaitClose

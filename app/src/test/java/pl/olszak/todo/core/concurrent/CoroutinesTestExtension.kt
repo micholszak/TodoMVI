@@ -1,4 +1,4 @@
-package pl.olszak.todo.core
+package pl.olszak.todo.core.concurrent
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtensionContext
 
 class CoroutinesTestExtension(
     private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
-) : BeforeEachCallback, AfterEachCallback, TestCoroutineScope by TestCoroutineScope(dispatcher) {
+) : BeforeEachCallback, AfterEachCallback, CompositeTestCoroutineScope by compositeTestCoroutineScope(dispatcher) {
     override fun beforeEach(context: ExtensionContext?) {
         Dispatchers.setMain(dispatcher)
     }

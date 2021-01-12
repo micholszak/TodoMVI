@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import pl.olszak.todo.R
-import pl.olszak.todo.core.concurrent.clicks
+import pl.olszak.todo.core.concurrent.extension.clicks
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
 import pl.olszak.todo.feature.addition.AddTaskViewModel
