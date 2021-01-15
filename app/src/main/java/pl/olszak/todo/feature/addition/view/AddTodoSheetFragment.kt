@@ -1,4 +1,4 @@
-package pl.olszak.todo.feature.add
+package pl.olszak.todo.feature.addition.view
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,15 +8,22 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jakewharton.rxbinding3.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import pl.olszak.todo.R
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
-import java.util.concurrent.TimeUnit
+import pl.olszak.todo.feature.addition.AddTaskViewModel
+import pl.olszak.todo.feature.addition.model.AddTaskIntent
+import pl.olszak.todo.feature.addition.model.AddViewState
+import pl.olszak.todo.feature.addition.model.FieldError
+import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint
 class AddTodoSheetFragment : BottomSheetDialogFragment() {
@@ -26,12 +33,16 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
     }
 
     private val addTaskViewModel: AddTaskViewModel by viewModels()
+    private val intents: Flow<AddTaskIntent> by lazy {
+        createButton.clicks()
+            .debounce(THROTTLE_INTERVAL_MS)
+            .map {
+                AddTaskIntent.ProcessTask(title.text?.toString().orEmpty())
+            }
+    }
 
     private lateinit var title: EditText
     private lateinit var createButton: Button
-    private val taskIntent: Observable<AddTaskIntent> by lazy {
-        addTaskIntent()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,18 +54,12 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         title = view.findViewById(R.id.title)
-        createButton = view.findViewById(R.id.create)
-        addTaskViewModel.subscribeToIntent(taskIntent)
-        addTaskViewModel.viewState.observe(viewLifecycleOwner, Observer(::render))
+        createButton = view.findViewById(R.id.createButton)
+        addTaskViewModel.subscribeToIntents(intents)
+        addTaskViewModel.state.onEach(::render)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
         title.showSoftInputInDialog()
     }
-
-    private fun addTaskIntent(): Observable<AddTaskIntent> =
-        createButton.clicks()
-            .throttleFirst(THROTTLE_INTERVAL_MS, TimeUnit.MILLISECONDS)
-            .map {
-                AddTaskIntent.ProcessTask(title.text?.toString().orEmpty())
-            }
 
     private fun render(state: AddViewState) {
         createButton.isClickable = state.isLoading.not()

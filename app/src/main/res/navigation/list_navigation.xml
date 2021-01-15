@@ -18,7 +18,7 @@
 
     <dialog
         android:id="@+id/add_todo"
-        android:name="pl.olszak.todo.feature.add.AddTodoSheetFragment"
+        android:name="pl.olszak.todo.feature.addition.view.AddTodoSheetFragment"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_todo_sheet" />
 

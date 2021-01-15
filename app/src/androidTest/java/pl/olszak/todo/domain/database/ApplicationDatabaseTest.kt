@@ -3,6 +3,7 @@ package pl.olszak.todo.domain.database
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import pl.olszak.todo.domain.database.model.TaskEntity
@@ -23,25 +24,23 @@ class ApplicationDatabaseTest {
     }
 
     @Test
-    fun testTaskInsertion() {
+    fun testTaskInsertion() = runBlocking {
         val entity =
             TaskEntity(title = "something")
         taskDao.insertTask(entity)
-        val testObserver = taskDao.getAllTasks().test()
-        val result = testObserver.values().last()
-        assertThat(result).hasSize(1)
+        val allTasks = taskDao.getAllTasks()
+        assertThat(allTasks).hasSize(1)
     }
 
     @Test
-    fun taskAutoIncrementationTest() {
+    fun taskAutoIncrementationTest() = runBlocking {
         val entities = List(5) {
             TaskEntity(title = "title")
         }
         entities.forEach { entity ->
             taskDao.insertTask(entity)
         }
-        val testObserver = taskDao.getAllTasks().test()
-        val result = testObserver.values().last()
-        assertThat(result).containsNoDuplicates()
+        val tasks = taskDao.getAllTasks()
+        assertThat(tasks).containsNoDuplicates()
     }
 }
