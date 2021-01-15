@@ -17,13 +17,13 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import pl.olszak.todo.R
-import pl.olszak.todo.core.concurrent.extension.clicks
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
 import pl.olszak.todo.feature.addition.AddTaskViewModel
 import pl.olszak.todo.feature.addition.model.AddTaskIntent
 import pl.olszak.todo.feature.addition.model.AddViewState
 import pl.olszak.todo.feature.addition.model.FieldError
+import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint
 class AddTodoSheetFragment : BottomSheetDialogFragment() {

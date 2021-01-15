@@ -58,7 +58,8 @@ ext {
 
     coroutineDependencies = [
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
-            "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
+            "io.github.reactivecircus.flowbinding:flowbinding-android:1.0.0"
     ]
 
     androidxCoreDependencies = [
