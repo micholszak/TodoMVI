@@ -1,7 +1,10 @@
 package pl.olszak.todo.feature.addition.interactor
 
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -25,7 +28,7 @@ class AddTaskTest {
         assertThrows<IllegalArgumentException> {
             runBlocking {
                 val task = Task()
-                addTask.execute(task)
+                addTask(task)
             }
         }
     }
@@ -37,7 +40,7 @@ class AddTaskTest {
             description = "something else",
             priority = Priority.HIGH
         )
-        addTask.execute(task)
+        addTask(task)
         verify(mockTaskDao).insertTask(
             TaskEntity(
                 priority = task.priority,
@@ -45,5 +48,19 @@ class AddTaskTest {
                 description = task.description
             )
         )
+    }
+
+    @Test
+    fun `Throw error upstream when adding to repository throws error`() {
+        assertThrows<Exception> {
+            runBlocking {
+                whenever(mockTaskDao.insertTask(any())) doThrow Exception()
+                val task = Task(
+                    title = "something"
+                )
+
+                addTask(task)
+            }
+        }
     }
 }

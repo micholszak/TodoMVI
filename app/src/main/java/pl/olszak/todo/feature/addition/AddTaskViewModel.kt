@@ -65,7 +65,7 @@ class AddTaskViewModel @ViewModelInject constructor(
         flow {
             emit(AddTaskResult.Pending)
             val task = Task(title = title)
-            addTask.execute(task)
+            addTask(task)
             emit(AddTaskResult.Added)
         }.catch {
             emit(AddTaskResult.Failure)

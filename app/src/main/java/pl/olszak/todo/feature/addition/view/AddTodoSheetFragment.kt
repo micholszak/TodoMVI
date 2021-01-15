@@ -57,7 +57,7 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
         createButton = view.findViewById(R.id.createButton)
         addTaskViewModel.subscribeToIntents(intents)
         addTaskViewModel.state.onEach(::render)
-            .launchIn(lifecycleScope)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
         title.showSoftInputInDialog()
     }
 

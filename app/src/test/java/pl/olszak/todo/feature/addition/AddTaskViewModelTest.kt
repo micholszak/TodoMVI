@@ -66,6 +66,6 @@ class AddTaskViewModelTest {
     }
 
     private suspend fun givenAddTaskThrowsError() {
-        whenever(addTask.execute(any())).doThrow(IllegalArgumentException())
+        whenever(addTask.invoke(any())).doThrow(IllegalArgumentException())
     }
 }
