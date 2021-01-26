@@ -48,17 +48,4 @@ class ApplicationDatabaseTest {
             assertThat(tasks).containsNoDuplicates()
         }
     }
-
-    @Test
-    fun testTaskDistinctCall() = runBlocking {
-        val entities = List(5) {
-            TaskEntity(title = "title")
-        }
-        taskDao.getAllTasksDistinct().test {
-            entities.forEach { entity ->
-                taskDao.insertTask(entity)
-                expectItem()
-            }
-        }
-    }
 }

@@ -1,9 +1,6 @@
 package pl.olszak.todo.feature.addition.interactor
 
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.olszak.todo.core.concurrent.IOCoroutineScope
 import pl.olszak.todo.domain.database.TaskDao
 import pl.olszak.todo.domain.database.model.TaskEntity
@@ -15,14 +12,12 @@ class AddTask @Inject constructor(
     private val scope: IOCoroutineScope
 ) {
 
-    suspend operator fun invoke(task: Task): Job =
-        coroutineScope {
+    suspend operator fun invoke(task: Task) =
+        withContext(context = scope.coroutineContext) {
             if (task.title.isEmpty()) {
                 throw IllegalArgumentException("Task missing title")
             }
-            scope.launch(context = coroutineContext.job) {
-                attemptToAddTask(task)
-            }
+            attemptToAddTask(task)
         }
 
     private suspend fun attemptToAddTask(task: Task) {
