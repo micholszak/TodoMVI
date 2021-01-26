@@ -2,6 +2,7 @@ package pl.olszak.todo.domain.database
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
+import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -28,8 +29,10 @@ class ApplicationDatabaseTest {
         val entity =
             TaskEntity(title = "something")
         taskDao.insertTask(entity)
-        val allTasks = taskDao.getAllTasks()
-        assertThat(allTasks).hasSize(1)
+        taskDao.getAllTasks().test {
+            val tasks = expectItem()
+            assertThat(tasks).hasSize(1)
+        }
     }
 
     @Test
@@ -40,7 +43,22 @@ class ApplicationDatabaseTest {
         entities.forEach { entity ->
             taskDao.insertTask(entity)
         }
-        val tasks = taskDao.getAllTasks()
-        assertThat(tasks).containsNoDuplicates()
+        taskDao.getAllTasks().test {
+            val tasks = expectItem()
+            assertThat(tasks).containsNoDuplicates()
+        }
+    }
+
+    @Test
+    fun testTaskDistinctCall() = runBlocking {
+        val entities = List(5) {
+            TaskEntity(title = "title")
+        }
+        taskDao.getAllTasksDistinct().test {
+            entities.forEach { entity ->
+                taskDao.insertTask(entity)
+                expectItem()
+            }
+        }
     }
 }
