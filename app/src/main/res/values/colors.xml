@@ -1,6 +1,6 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="primaryColor">#d95284</color>
+    <color name="primaryColor">@color/second</color>
     <color name="primaryLightColor">#ff84b3</color>
     <color name="primaryDarkColor">#a41a58</color>
     <color name="secondaryColor">#044bd9</color>
@@ -10,5 +10,12 @@
     <color name="secondaryTextColor">#ffffff</color>
     <color name="primaryTextInverseColor">#000000</color>
     <color name="secondaryTextInverseColor">#000000</color>
-    <color name="controlNormalColor">#ffffff</color>
+    <color name="controlNormalColor">@color/first</color>
+
+    <color name="first">#050504</color>
+    <color name="second">#F1A200</color>
+    <color name="third">#684700</color>
+    <color name="forth">#CC9410</color>
+    <color name="fifth">#9F6C00</color>
+    <color name="sixth">#D6D6D3</color>
 </resources>
