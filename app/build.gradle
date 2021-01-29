@@ -44,6 +44,10 @@ android {
                 '-Xopt-in=kotlinx.coroutines.FlowPreview'
         ]
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

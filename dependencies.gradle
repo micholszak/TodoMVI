@@ -56,6 +56,7 @@ ext {
 
     viewExtensionDependencies = [
             "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0",
+            "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.0",
             "jp.wasabeef:recyclerview-animators:4.0.1"
     ]
 

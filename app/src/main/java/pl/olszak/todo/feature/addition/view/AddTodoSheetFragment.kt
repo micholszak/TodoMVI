@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -15,9 +13,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
-import pl.olszak.todo.R
+import pl.olszak.todo.core.bindToViewLifecycle
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
+import pl.olszak.todo.databinding.FragmentAddTodoSheetBinding
 import pl.olszak.todo.feature.addition.AddTaskViewModel
 import pl.olszak.todo.feature.addition.model.AddTaskIntent
 import pl.olszak.todo.feature.addition.model.AddViewState
@@ -31,41 +30,40 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
         private const val THROTTLE_INTERVAL_MS = 200L
     }
 
+    private var binding: FragmentAddTodoSheetBinding by bindToViewLifecycle()
     private val addTaskViewModel: AddTaskViewModel by viewModels()
     private val intents: Flow<AddTaskIntent> by lazy {
-        createButton.clicks()
+        binding.createButton.clicks()
             .debounce(THROTTLE_INTERVAL_MS)
             .map {
-                AddTaskIntent.ProcessTask(title.text?.toString().orEmpty())
+                val text = binding.title.text?.toString().orEmpty()
+                AddTaskIntent.ProcessTask(text)
             }
     }
-
-    private lateinit var title: EditText
-    private lateinit var createButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_add_todo_sheet, container, false)
+    ): View {
+        binding = FragmentAddTodoSheetBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        title = view.findViewById(R.id.title)
-        createButton = view.findViewById(R.id.createButton)
         addTaskViewModel.subscribeToIntents(intents)
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             addTaskViewModel.state.collect(::render)
         }
-        title.showSoftInputInDialog()
+        binding.title.showSoftInputInDialog()
     }
 
     private fun render(state: AddViewState) {
-        createButton.isClickable = state.isLoading.not()
+        binding.createButton.isClickable = state.isLoading.not()
         state.errorEvent?.consume { field ->
             when (field) {
-                FieldError.TITLE -> title.error = "Title should not be empty"
+                FieldError.TITLE -> binding.title.error = "Title should not be empty"
             }
         }
 
@@ -75,7 +73,7 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
     }
 
     override fun onDismiss(dialog: DialogInterface) {
-        title.hideSoftInputFromDialog()
+        binding.title.hideSoftInputFromDialog()
         super.onDismiss(dialog)
     }
 }
