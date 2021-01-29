@@ -18,12 +18,15 @@ class ReadWriteLifecycleBoundProperty<T>(
     private var viewLifecycleOwner: LifecycleOwner? = null
 
     init {
-        fragment.viewLifecycleOwnerLiveData.observe(fragment, { newLifecycleOwner ->
-            viewLifecycleOwner?.lifecycle?.removeObserver(this)
-            viewLifecycleOwner = newLifecycleOwner.also {
-                it.lifecycle.addObserver(this)
+        fragment.viewLifecycleOwnerLiveData.observe(
+            fragment,
+            { newLifecycleOwner ->
+                viewLifecycleOwner?.lifecycle?.removeObserver(this)
+                viewLifecycleOwner = newLifecycleOwner.also {
+                    it.lifecycle.addObserver(this)
+                }
             }
-        })
+        )
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
