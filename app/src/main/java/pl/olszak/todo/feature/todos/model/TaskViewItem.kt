@@ -1,4 +1,4 @@
-package pl.olszak.todo.feature.todos.adapter
+package pl.olszak.todo.feature.todos.model
 
 import pl.olszak.todo.core.adapter.AdapterItem
 

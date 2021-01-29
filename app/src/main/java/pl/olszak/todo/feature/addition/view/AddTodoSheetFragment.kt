@@ -12,10 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import pl.olszak.todo.R
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
@@ -56,8 +55,9 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
         title = view.findViewById(R.id.title)
         createButton = view.findViewById(R.id.createButton)
         addTaskViewModel.subscribeToIntents(intents)
-        addTaskViewModel.state.onEach(::render)
-            .launchIn(viewLifecycleOwner.lifecycleScope)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            addTaskViewModel.state.collect(::render)
+        }
         title.showSoftInputInDialog()
     }
 

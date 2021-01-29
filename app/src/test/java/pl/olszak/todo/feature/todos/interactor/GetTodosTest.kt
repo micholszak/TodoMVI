@@ -8,18 +8,15 @@ import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
-import pl.olszak.todo.core.concurrent.compositeTestCoroutineScope
 import pl.olszak.todo.domain.database.TaskDao
 import pl.olszak.todo.domain.database.model.Priority
 import pl.olszak.todo.domain.database.model.TaskEntity
 
 class GetTodosTest {
     private val mockTaskDao: TaskDao = mock()
-    private val scope = compositeTestCoroutineScope()
 
     private val getTodos = GetTodos(
-        taskDao = mockTaskDao,
-        scope = scope
+        taskDao = mockTaskDao
     )
 
     @Test
