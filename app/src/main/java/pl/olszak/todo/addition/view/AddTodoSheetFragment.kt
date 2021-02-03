@@ -2,9 +2,7 @@ package pl.olszak.todo.addition.view
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -17,9 +15,9 @@ import pl.olszak.todo.addition.AddTaskViewModel
 import pl.olszak.todo.addition.model.AddTaskIntent
 import pl.olszak.todo.addition.model.AddViewState
 import pl.olszak.todo.addition.model.FieldError
-import pl.olszak.todo.core.bindToViewLifecycle
 import pl.olszak.todo.core.hideSoftInputFromDialog
 import pl.olszak.todo.core.showSoftInputInDialog
+import pl.olszak.todo.core.viewBinding
 import pl.olszak.todo.databinding.FragmentAddTodoSheetBinding
 import reactivecircus.flowbinding.android.view.clicks
 
@@ -30,7 +28,7 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
         private const val THROTTLE_INTERVAL_MS = 200L
     }
 
-    private var binding: FragmentAddTodoSheetBinding by bindToViewLifecycle()
+    private val binding: FragmentAddTodoSheetBinding by viewBinding(FragmentAddTodoSheetBinding::bind)
     private val addTaskViewModel: AddTaskViewModel by viewModels()
     private val intents: Flow<AddTaskIntent> by lazy {
         binding.createButton.clicks()
@@ -39,15 +37,6 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
                 val text = binding.title.text?.toString().orEmpty()
                 AddTaskIntent.ProcessTask(text)
             }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentAddTodoSheetBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
