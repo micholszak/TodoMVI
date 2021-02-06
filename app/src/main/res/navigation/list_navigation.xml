@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/todo_list"
-        android:name="pl.olszak.todo.todos.view.TodoListFragment"
+        android:name="pl.olszak.todo.view.list.TodoListFragment"
         android:label="fragment_todo_list"
         tools:layout="@layout/fragment_todo_list">
 
@@ -18,7 +18,7 @@
 
     <dialog
         android:id="@+id/add_todo"
-        android:name="pl.olszak.todo.addition.view.AddTodoSheetFragment"
+        android:name="pl.olszak.todo.view.addition.AddTodoSheetFragment"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_todo_sheet" />
 

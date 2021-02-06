@@ -7,6 +7,7 @@ ext {
     room_version = "2.2.6"
     junit5_version = "5.7.0"
     coroutines_version = "1.4.2"
+    orbit_version = "2.2.0"
 
     hilt_version = "2.31.2-alpha"
     hilt_lifecycle_version = "1.0.0-alpha02"
@@ -63,7 +64,10 @@ ext {
     coroutineDependencies = [
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
-            "io.github.reactivecircus.flowbinding:flowbinding-android:1.0.0"
+            "io.github.reactivecircus.flowbinding:flowbinding-android:1.0.0",
+            "org.orbit-mvi:orbit-core:$orbit_version",
+            "org.orbit-mvi:orbit-viewmodel:$orbit_version",
+            "org.orbit-mvi:orbit-coroutines:$orbit_version"
     ]
 
     androidxCoreDependencies = [
@@ -80,7 +84,8 @@ ext {
             turbine,
             truth,
             "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
-            "androidx.arch.core:core-testing:2.1.0"
+            "androidx.arch.core:core-testing:2.1.0",
+            "org.orbit-mvi:orbit-test:$orbit_version"
     ]
 
     testRuntimeDependencies = [

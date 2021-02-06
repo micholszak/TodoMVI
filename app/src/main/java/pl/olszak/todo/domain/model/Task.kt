@@ -1,6 +1,6 @@
 package pl.olszak.todo.domain.model
 
-import pl.olszak.todo.domain.database.model.Priority
+import pl.olszak.todo.cache.model.Priority
 
 data class Task(
     val title: String = "",

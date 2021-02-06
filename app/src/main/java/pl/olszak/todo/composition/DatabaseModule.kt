@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import pl.olszak.todo.domain.database.ApplicationDatabase
+import pl.olszak.todo.cache.ApplicationDatabase
 import javax.inject.Singleton
 
 @Module

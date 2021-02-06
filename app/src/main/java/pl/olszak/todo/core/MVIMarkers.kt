@@ -2,11 +2,11 @@ package pl.olszak.todo.core
 
 import kotlinx.coroutines.flow.Flow
 
-typealias Reducer<S, R> = suspend (currentState: S, result: R) -> S
+typealias Reducer<State, Result> = suspend (currentState: State, result: Result) -> State
 
-typealias IntentProcessor<S, R> = suspend (intent: S) -> Flow<R>
+typealias ActionProcessor<Action, Result> = suspend (intent: Action) -> Flow<Result>
 
-interface Intention
+interface Action
 
 interface Result
 

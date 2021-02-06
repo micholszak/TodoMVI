@@ -4,14 +4,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import pl.olszak.todo.core.concurrent.DefaultCoroutineScope
-import pl.olszak.todo.core.concurrent.IOCoroutineScope
-import pl.olszak.todo.core.concurrent.MainCoroutineScope
-import pl.olszak.todo.core.concurrent.MainImmediateCoroutineScope
-import pl.olszak.todo.core.concurrent.defaultCoroutineScope
-import pl.olszak.todo.core.concurrent.ioCoroutineScope
-import pl.olszak.todo.core.concurrent.mainCoroutineScope
-import pl.olszak.todo.core.concurrent.mainImmediateCoroutineScope
+import pl.olszak.todo.core.domain.DefaultCoroutineScope
+import pl.olszak.todo.core.domain.IOCoroutineScope
+import pl.olszak.todo.core.domain.MainCoroutineScope
+import pl.olszak.todo.core.domain.MainImmediateCoroutineScope
+import pl.olszak.todo.core.domain.defaultCoroutineScope
+import pl.olszak.todo.core.domain.ioCoroutineScope
+import pl.olszak.todo.core.domain.mainCoroutineScope
+import pl.olszak.todo.core.domain.mainImmediateCoroutineScope
 import javax.inject.Singleton
 
 @Module
