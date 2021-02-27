@@ -3,8 +3,8 @@ package pl.olszak.todo.cache
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
-import com.google.common.truth.Truth
 import kotlinx.coroutines.runBlocking
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import pl.olszak.todo.cache.model.TaskEntity
@@ -31,7 +31,7 @@ class ApplicationDatabaseTest {
         taskDao.insertTask(entity)
         taskDao.getAllTasks().test {
             val tasks = expectItem()
-            Truth.assertThat(tasks).hasSize(1)
+            assertThat(tasks).hasSize(1)
         }
     }
 
@@ -45,7 +45,7 @@ class ApplicationDatabaseTest {
         }
         taskDao.getAllTasks().test {
             val tasks = expectItem()
-            Truth.assertThat(tasks).containsNoDuplicates()
+            assertThat(tasks).doesNotHaveDuplicates()
         }
     }
 }
