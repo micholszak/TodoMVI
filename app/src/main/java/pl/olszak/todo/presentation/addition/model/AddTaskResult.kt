@@ -1,6 +1,6 @@
 package pl.olszak.todo.presentation.addition.model
 
-import pl.olszak.todo.core.Result
+import pl.olszak.todo.domain.Result
 
 sealed class AddTaskResult : Result {
 

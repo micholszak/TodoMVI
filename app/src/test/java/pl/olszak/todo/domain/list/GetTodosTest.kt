@@ -1,12 +1,12 @@
 package pl.olszak.todo.domain.list
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.cache.model.Priority
@@ -23,7 +23,7 @@ class GetTodosTest {
     fun `Retrieve tasks from repository`() = runBlockingTest {
         givenGetAllTasksOperates()
 
-        getTodos().test {
+        getTodos.execute().test {
             val tasks = expectItem()
             assertThat(tasks).hasSize(0)
             expectComplete()
@@ -44,7 +44,7 @@ class GetTodosTest {
         }
 
         givenGetAllTasksOperates(returnedEntities = entities)
-        getTodos().test {
+        getTodos.execute().test {
             val tasks = expectItem()
             tasks.forEach { task ->
                 assertThat(task.title).isEqualTo(title)

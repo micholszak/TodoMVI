@@ -1,11 +1,11 @@
-package pl.olszak.todo.core.view.adapter
+package pl.olszak.todo.view.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import pl.olszak.todo.core.view.animation.Animation
-import pl.olszak.todo.core.view.animation.animateWith
-import pl.olszak.todo.core.view.model.AdapterItem
+import pl.olszak.todo.view.animation.Animation
+import pl.olszak.todo.view.animation.animateWith
+import pl.olszak.todo.view.model.AdapterItem
 
 class ItemAdapter(
     vararg delegates: AdapterDelegate<List<AdapterItem>>,

@@ -1,4 +1,4 @@
-package pl.olszak.todo.core.view.model
+package pl.olszak.todo.view.model
 
 interface AdapterItem {
 

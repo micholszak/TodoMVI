@@ -3,7 +3,7 @@ package pl.olszak.todo.domain.addition
 import kotlinx.coroutines.withContext
 import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.cache.model.TaskEntity
-import pl.olszak.todo.core.domain.IOCoroutineScope
+import pl.olszak.todo.domain.IOCoroutineScope
 import pl.olszak.todo.domain.model.Task
 import javax.inject.Inject
 

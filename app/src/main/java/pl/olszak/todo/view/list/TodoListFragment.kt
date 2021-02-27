@@ -12,13 +12,13 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import pl.olszak.todo.R
-import pl.olszak.todo.core.view.adapter.ItemAdapter
-import pl.olszak.todo.core.view.animation.ScaleAnimation
-import pl.olszak.todo.core.view.viewBinding
 import pl.olszak.todo.databinding.FragmentTodoListBinding
 import pl.olszak.todo.presentation.list.TodosViewModel
 import pl.olszak.todo.presentation.list.model.TodosViewState
-import pl.olszak.todo.todos.view.createTaskDelegate
+import pl.olszak.todo.view.adapter.ItemAdapter
+import pl.olszak.todo.view.animation.ScaleAnimation
+import pl.olszak.todo.view.list.adapter.createTaskDelegate
+import pl.olszak.todo.view.viewBinding
 import kotlin.time.seconds
 
 @AndroidEntryPoint

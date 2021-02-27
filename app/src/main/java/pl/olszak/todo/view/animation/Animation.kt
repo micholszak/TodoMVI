@@ -1,4 +1,4 @@
-package pl.olszak.todo.core.view.animation
+package pl.olszak.todo.view.animation
 
 import android.animation.ObjectAnimator
 import android.view.View

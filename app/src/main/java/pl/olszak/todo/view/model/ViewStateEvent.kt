@@ -1,4 +1,4 @@
-package pl.olszak.todo.core
+package pl.olszak.todo.view.model
 
 /**
  * Representation of single shot event to handle by view

@@ -1,4 +1,4 @@
-package pl.olszak.todo.core.domain
+package pl.olszak.todo.domain
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

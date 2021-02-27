@@ -1,8 +1,8 @@
 package pl.olszak.todo.presentation.addition
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,17 +12,19 @@ import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.launch
-import pl.olszak.todo.addition.model.AddViewState
-import pl.olszak.todo.addition.model.FieldError
-import pl.olszak.todo.core.ActionProcessor
-import pl.olszak.todo.core.Reducer
-import pl.olszak.todo.core.ViewStateEvent
+import pl.olszak.todo.domain.ActionProcessor
+import pl.olszak.todo.domain.Reducer
 import pl.olszak.todo.domain.addition.AddTask
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
 import pl.olszak.todo.presentation.addition.model.AddTaskResult
+import pl.olszak.todo.presentation.addition.model.AddViewState
+import pl.olszak.todo.presentation.addition.model.FieldError
+import pl.olszak.todo.view.model.ViewStateEvent
+import javax.inject.Inject
 
-class AddTaskViewModel @ViewModelInject constructor(
+@HiltViewModel
+class AddTaskViewModel @Inject constructor(
     private val addTask: AddTask
 ) : ViewModel() {
 

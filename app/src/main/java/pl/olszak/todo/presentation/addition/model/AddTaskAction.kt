@@ -1,6 +1,6 @@
 package pl.olszak.todo.presentation.addition.model
 
-import pl.olszak.todo.core.Action
+import pl.olszak.todo.domain.Action
 
 sealed class AddTaskAction : Action {
 

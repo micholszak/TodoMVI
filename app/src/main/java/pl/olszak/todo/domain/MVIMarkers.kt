@@ -1,4 +1,4 @@
-package pl.olszak.todo.core
+package pl.olszak.todo.domain
 
 import kotlinx.coroutines.flow.Flow
 

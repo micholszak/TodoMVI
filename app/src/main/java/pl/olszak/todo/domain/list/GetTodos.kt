@@ -7,11 +7,11 @@ import pl.olszak.todo.cache.model.TaskEntity
 import pl.olszak.todo.domain.model.Task
 import javax.inject.Inject
 
-class GetTodos @Inject constructor(
-    private val taskDao: TaskDao
+open class GetTodos @Inject constructor(
+    private val taskDao: TaskDao,
 ) {
 
-    operator fun invoke(): Flow<List<Task>> =
+    fun execute(): Flow<List<Task>> =
         taskDao.getAllTasks()
             .map(::mapEntities)
 

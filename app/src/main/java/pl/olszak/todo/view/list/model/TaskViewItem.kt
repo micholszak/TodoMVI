@@ -1,10 +1,10 @@
 package pl.olszak.todo.view.list.model
 
-import pl.olszak.todo.core.view.model.AdapterItem
+import pl.olszak.todo.view.model.AdapterItem
 
 data class TaskViewItem(
-    val title: String,
-    val description: String
+    val title: String = "",
+    val description: String = ""
 ) : AdapterItem {
 
     override fun areItemsTheSame(other: AdapterItem): Boolean =
@@ -14,6 +14,7 @@ data class TaskViewItem(
         val otherTask = other as? TaskViewItem
             ?: return false
 
-        return otherTask.title == title && otherTask.description == description
+        return otherTask.title == title &&
+            otherTask.description == description
     }
 }

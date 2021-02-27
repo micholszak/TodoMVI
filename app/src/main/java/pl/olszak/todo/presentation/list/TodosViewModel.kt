@@ -1,51 +1,59 @@
 package pl.olszak.todo.presentation.list
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
-import org.orbitmvi.orbit.coroutines.transformFlow
-import org.orbitmvi.orbit.syntax.strict.orbit
-import org.orbitmvi.orbit.syntax.strict.reduce
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
+import pl.olszak.todo.domain.DispatcherProvider
 import pl.olszak.todo.domain.list.GetTodos
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.list.model.TodosViewState
 import pl.olszak.todo.view.list.model.TaskViewItem
+import javax.inject.Inject
 
-class TodosViewModel @ViewModelInject constructor(
-    private val getTodos: GetTodos
+@HiltViewModel
+class TodosViewModel @Inject constructor(
+    private val getTodos: GetTodos,
+    dispatcherProvider: DispatcherProvider
 ) : ViewModel(), ContainerHost<TodosViewState, Unit> {
 
     override val container: Container<TodosViewState, Unit> =
-        container(initialState = TodosViewState())
+        container(
+            initialState = TodosViewState(),
+            settings = Container.Settings(
+                backgroundDispatcher = dispatcherProvider.io,
+                orbitDispatcher = dispatcherProvider.default
+            )
+        ) {
+            subscribeToDatabaseUpdates()
+        }
 
-    init {
-        subscribeToDatabaseUpdates()
-    }
-
-    fun sortData() = orbit {
+    fun sortData() = intent {
         reduce {
             state.copy(
-                filtered = true,
+                sorted = true,
                 tasks = state.tasks.sortedBy(TaskViewItem::title)
             )
         }
     }
 
-    private fun subscribeToDatabaseUpdates() = orbit {
-        transformFlow {
-            getTodos().map(::mapTasks)
-        }.reduce {
-            val newItems = if (state.filtered)
-                event.sortedBy(TaskViewItem::title)
-            else
-                event
+    private fun subscribeToDatabaseUpdates() = intent {
+        getTodos.execute().map(::mapTasks).collect { items ->
+            reduce {
+                val newItems = if (state.sorted)
+                    items.sortedBy(TaskViewItem::title)
+                else
+                    items
 
-            state.copy(
-                tasks = newItems
-            )
+                state.copy(
+                    tasks = newItems
+                )
+            }
         }
     }
 

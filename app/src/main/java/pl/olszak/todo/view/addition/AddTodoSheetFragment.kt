@@ -14,14 +14,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import pl.olszak.todo.R
-import pl.olszak.todo.addition.model.AddViewState
-import pl.olszak.todo.addition.model.FieldError
-import pl.olszak.todo.core.view.hideSoftInputFromDialog
-import pl.olszak.todo.core.view.showSoftInputInDialog
-import pl.olszak.todo.core.view.viewBinding
 import pl.olszak.todo.databinding.FragmentAddTodoSheetBinding
 import pl.olszak.todo.presentation.addition.AddTaskViewModel
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
+import pl.olszak.todo.presentation.addition.model.AddViewState
+import pl.olszak.todo.presentation.addition.model.FieldError
+import pl.olszak.todo.view.hideSoftInputFromDialog
+import pl.olszak.todo.view.showSoftInputInDialog
+import pl.olszak.todo.view.viewBinding
 import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint

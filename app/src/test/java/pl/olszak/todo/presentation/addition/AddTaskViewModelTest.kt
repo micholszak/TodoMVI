@@ -1,20 +1,20 @@
 package pl.olszak.todo.presentation.addition
 
 import app.cash.turbine.test
-import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import pl.olszak.todo.addition.model.AddViewState
-import pl.olszak.todo.core.domain.CoroutinesTestExtension
+import pl.olszak.todo.domain.CoroutinesTestExtension
 import pl.olszak.todo.domain.addition.AddTask
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
+import pl.olszak.todo.presentation.addition.model.AddViewState
 
 class AddTaskViewModelTest {
 
