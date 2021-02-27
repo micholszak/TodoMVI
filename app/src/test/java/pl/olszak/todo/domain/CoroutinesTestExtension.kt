@@ -9,8 +9,6 @@ import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.extension.AfterEachCallback
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
-import pl.olszak.todo.core.domain.CompositeTestCoroutineScope
-import pl.olszak.todo.core.domain.compositeTestCoroutineScope
 
 class CoroutinesTestExtension(
     private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()

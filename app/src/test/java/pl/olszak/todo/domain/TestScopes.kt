@@ -1,10 +1,6 @@
-package pl.olszak.todo.core.domain
+package pl.olszak.todo.domain
 
 import kotlinx.coroutines.test.TestCoroutineScope
-import pl.olszak.todo.domain.DefaultCoroutineScope
-import pl.olszak.todo.domain.IOCoroutineScope
-import pl.olszak.todo.domain.MainCoroutineScope
-import pl.olszak.todo.domain.MainImmediateCoroutineScope
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 

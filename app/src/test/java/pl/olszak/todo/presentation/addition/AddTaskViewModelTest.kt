@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import pl.olszak.todo.domain.CoroutinesTestExtension
-import pl.olszak.todo.domain.addition.AddTask
+import pl.olszak.todo.domain.interactor.AddTask
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
 import pl.olszak.todo.presentation.addition.model.AddViewState
 

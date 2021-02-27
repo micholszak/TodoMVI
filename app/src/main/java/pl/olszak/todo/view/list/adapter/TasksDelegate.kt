@@ -4,8 +4,8 @@ import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import pl.olszak.todo.R
 import pl.olszak.todo.databinding.ViewHolderTaskBinding
+import pl.olszak.todo.view.common.model.AdapterItem
 import pl.olszak.todo.view.list.model.TaskViewItem
-import pl.olszak.todo.view.model.AdapterItem
 
 fun createTaskDelegate() =
     adapterDelegateViewBinding<TaskViewItem, AdapterItem, ViewHolderTaskBinding>(

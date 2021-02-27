@@ -1,4 +1,4 @@
-package pl.olszak.todo.domain.list
+package pl.olszak.todo.domain.interactor
 
 import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.doReturn
@@ -12,10 +12,10 @@ import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.cache.model.Priority
 import pl.olszak.todo.cache.model.TaskEntity
 
-class GetTodosTest {
+class GetTasksTest {
     private val mockTaskDao: TaskDao = mock()
 
-    private val getTodos = GetTodos(
+    private val getTodos = GetTasks(
         taskDao = mockTaskDao
     )
 

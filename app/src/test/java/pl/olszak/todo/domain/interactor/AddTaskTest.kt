@@ -1,4 +1,4 @@
-package pl.olszak.todo.domain.addition
+package pl.olszak.todo.domain.interactor
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doThrow
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.assertThrows
 import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.cache.model.Priority
 import pl.olszak.todo.cache.model.TaskEntity
-import pl.olszak.todo.core.domain.compositeTestCoroutineScope
+import pl.olszak.todo.domain.compositeTestCoroutineScope
 import pl.olszak.todo.domain.model.Task
 
 class AddTaskTest {

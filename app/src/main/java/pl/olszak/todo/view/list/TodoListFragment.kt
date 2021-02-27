@@ -15,10 +15,10 @@ import pl.olszak.todo.R
 import pl.olszak.todo.databinding.FragmentTodoListBinding
 import pl.olszak.todo.presentation.list.TodosViewModel
 import pl.olszak.todo.presentation.list.model.TodosViewState
-import pl.olszak.todo.view.adapter.ItemAdapter
-import pl.olszak.todo.view.animation.ScaleAnimation
+import pl.olszak.todo.view.common.ScaleAnimation
+import pl.olszak.todo.view.common.adapter.ItemAdapter
+import pl.olszak.todo.view.common.viewBinding
 import pl.olszak.todo.view.list.adapter.createTaskDelegate
-import pl.olszak.todo.view.viewBinding
 import kotlin.time.seconds
 
 @AndroidEntryPoint

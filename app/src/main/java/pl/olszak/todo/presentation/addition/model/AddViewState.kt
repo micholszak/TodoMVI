@@ -1,7 +1,7 @@
 package pl.olszak.todo.presentation.addition.model
 
 import pl.olszak.todo.domain.ViewState
-import pl.olszak.todo.view.model.ViewStateEvent
+import pl.olszak.todo.view.common.model.ViewStateEvent
 
 data class AddViewState(
     val isLoading: Boolean = false,

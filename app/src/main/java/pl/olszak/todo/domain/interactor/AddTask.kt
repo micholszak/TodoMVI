@@ -1,4 +1,4 @@
-package pl.olszak.todo.domain.addition
+package pl.olszak.todo.domain.interactor
 
 import kotlinx.coroutines.withContext
 import pl.olszak.todo.cache.TaskDao

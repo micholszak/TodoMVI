@@ -19,9 +19,9 @@ import pl.olszak.todo.presentation.addition.AddTaskViewModel
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
 import pl.olszak.todo.presentation.addition.model.AddViewState
 import pl.olszak.todo.presentation.addition.model.FieldError
-import pl.olszak.todo.view.hideSoftInputFromDialog
-import pl.olszak.todo.view.showSoftInputInDialog
-import pl.olszak.todo.view.viewBinding
+import pl.olszak.todo.view.common.hideSoftInputFromDialog
+import pl.olszak.todo.view.common.showSoftInputInDialog
+import pl.olszak.todo.view.common.viewBinding
 import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint

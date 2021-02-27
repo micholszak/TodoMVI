@@ -1,4 +1,4 @@
-package pl.olszak.todo.view
+package pl.olszak.todo.view.common
 
 import android.content.Context
 import android.view.LayoutInflater

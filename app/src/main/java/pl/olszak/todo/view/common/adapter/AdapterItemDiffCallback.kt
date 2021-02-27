@@ -1,7 +1,7 @@
-package pl.olszak.todo.view.adapter
+package pl.olszak.todo.view.common.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import pl.olszak.todo.view.model.AdapterItem
+import pl.olszak.todo.view.common.model.AdapterItem
 
 class AdapterItemDiffCallback : DiffUtil.ItemCallback<AdapterItem>() {
 

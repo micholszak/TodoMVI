@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.launch
 import pl.olszak.todo.domain.ActionProcessor
 import pl.olszak.todo.domain.Reducer
-import pl.olszak.todo.domain.addition.AddTask
+import pl.olszak.todo.domain.interactor.AddTask
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
 import pl.olszak.todo.presentation.addition.model.AddTaskResult
 import pl.olszak.todo.presentation.addition.model.AddViewState
 import pl.olszak.todo.presentation.addition.model.FieldError
-import pl.olszak.todo.view.model.ViewStateEvent
+import pl.olszak.todo.view.common.model.ViewStateEvent
 import javax.inject.Inject
 
 @HiltViewModel

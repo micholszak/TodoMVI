@@ -1,6 +1,6 @@
 package pl.olszak.todo.view.list.model
 
-import pl.olszak.todo.view.model.AdapterItem
+import pl.olszak.todo.view.common.model.AdapterItem
 
 data class TaskViewItem(
     val title: String = "",

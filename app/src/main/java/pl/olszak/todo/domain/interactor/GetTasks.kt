@@ -1,4 +1,4 @@
-package pl.olszak.todo.domain.list
+package pl.olszak.todo.domain.interactor
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -7,7 +7,7 @@ import pl.olszak.todo.cache.model.TaskEntity
 import pl.olszak.todo.domain.model.Task
 import javax.inject.Inject
 
-open class GetTodos @Inject constructor(
+open class GetTasks @Inject constructor(
     private val taskDao: TaskDao,
 ) {
 

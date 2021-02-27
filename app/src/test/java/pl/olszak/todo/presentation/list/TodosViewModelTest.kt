@@ -12,7 +12,7 @@ import org.orbitmvi.orbit.assert
 import org.orbitmvi.orbit.test
 import pl.olszak.todo.domain.InstantTaskExecutorExtension
 import pl.olszak.todo.domain.TestDispatcherProvider
-import pl.olszak.todo.domain.list.GetTodos
+import pl.olszak.todo.domain.interactor.GetTasks
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.list.model.TodosViewState
 import pl.olszak.todo.view.list.model.TaskViewItem
@@ -21,32 +21,32 @@ import pl.olszak.todo.view.list.model.TaskViewItem
 class TodosViewModelTest {
 
     companion object {
-        private const val SIZE = 5
+        private const val DEFAULT_SIZE = 5
     }
 
-    private val mockGetTodos: GetTodos = mock()
+    private val mockGetTasks: GetTasks = mock()
     private val dispatcherProvider = TestDispatcherProvider()
 
     @Test
     fun `Start requesting for database updates during initialisation`() {
-        givenThatGetTodosReturnsWith(flowOf(emptyList()))
+        givenThatGetTasksReturnsWith(flowOf(emptyList()))
         val initialState = TodosViewState()
-        val testSubject = TodosViewModel(mockGetTodos, dispatcherProvider).test(
+        val testSubject = TodosViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
 
         testSubject.assert(initialState)
-        verify(mockGetTodos).execute()
+        verify(mockGetTasks).execute()
     }
 
     @Test
     fun `Update the list with new values`() {
         val firstTasks = createTasks()
-        givenThatGetTodosReturnsWith(flowOf(firstTasks))
+        givenThatGetTasksReturnsWith(flowOf(firstTasks))
 
         val initialState = TodosViewState()
-        val viewModel = TodosViewModel(mockGetTodos, dispatcherProvider).test(
+        val viewModel = TodosViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
@@ -59,7 +59,7 @@ class TodosViewModelTest {
 
     @Test
     fun `Update state after database update`() {
-        givenThatGetTodosReturnsWith(
+        givenThatGetTasksReturnsWith(
             flowOf(
                 createTasks(5),
                 createTasks(6),
@@ -68,7 +68,7 @@ class TodosViewModelTest {
         )
 
         val initialState = TodosViewState()
-        val viewModel = TodosViewModel(mockGetTodos, dispatcherProvider).test(
+        val viewModel = TodosViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
@@ -86,7 +86,7 @@ class TodosViewModelTest {
         val initialState = TodosViewState(
             tasks = createTaskViewItems().reversed()
         )
-        val viewModel = TodosViewModel(mockGetTodos, dispatcherProvider).test(
+        val viewModel = TodosViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState
         )
         viewModel.sortData()
@@ -97,16 +97,16 @@ class TodosViewModelTest {
         }
     }
 
-    private fun givenThatGetTodosReturnsWith(tasksFlow: Flow<List<Task>>) {
-        whenever(mockGetTodos.execute()).doReturn(tasksFlow)
+    private fun givenThatGetTasksReturnsWith(tasksFlow: Flow<List<Task>>) {
+        whenever(mockGetTasks.execute()).doReturn(tasksFlow)
     }
 
-    private fun createTasks(size: Int = SIZE): List<Task> =
+    private fun createTasks(size: Int = DEFAULT_SIZE): List<Task> =
         List(size) { index ->
             Task("$index")
         }
 
-    private fun createTaskViewItems(size: Int = SIZE): List<TaskViewItem> =
+    private fun createTaskViewItems(size: Int = DEFAULT_SIZE): List<TaskViewItem> =
         List(size) { index ->
             TaskViewItem(title = "$index")
         }

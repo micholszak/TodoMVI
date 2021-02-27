@@ -10,7 +10,7 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import pl.olszak.todo.domain.DispatcherProvider
-import pl.olszak.todo.domain.list.GetTodos
+import pl.olszak.todo.domain.interactor.GetTasks
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.list.model.TodosViewState
 import pl.olszak.todo.view.list.model.TaskViewItem
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TodosViewModel @Inject constructor(
-    private val getTodos: GetTodos,
+    private val getTasks: GetTasks,
     dispatcherProvider: DispatcherProvider
 ) : ViewModel(), ContainerHost<TodosViewState, Unit> {
 
@@ -43,7 +43,7 @@ class TodosViewModel @Inject constructor(
     }
 
     private fun subscribeToDatabaseUpdates() = intent {
-        getTodos.execute().map(::mapTasks).collect { items ->
+        getTasks.execute().map(::mapTasks).collect { items ->
             reduce {
                 val newItems = if (state.sorted)
                     items.sortedBy(TaskViewItem::title)
