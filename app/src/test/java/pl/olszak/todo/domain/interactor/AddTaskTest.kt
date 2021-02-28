@@ -11,16 +11,16 @@ import org.junit.jupiter.api.assertThrows
 import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.cache.model.Priority
 import pl.olszak.todo.cache.model.TaskEntity
-import pl.olszak.todo.domain.compositeTestCoroutineScope
+import pl.olszak.todo.domain.TestDispatcherProvider
 import pl.olszak.todo.domain.model.Task
 
 class AddTaskTest {
     private val mockTaskDao: TaskDao = mock()
-    private val scope = compositeTestCoroutineScope()
+    private val dispatcherProvider = TestDispatcherProvider()
 
     private val addTask = AddTask(
         taskDao = mockTaskDao,
-        scope = scope
+        dispatcherProvider = dispatcherProvider
     )
 
     @Test
