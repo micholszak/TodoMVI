@@ -34,7 +34,7 @@ class TasksViewModel @Inject constructor(
         }
 
     private fun subscribeToDatabaseUpdates() = intent {
-        getTasks.execute().map(::mapTasks).collect { items ->
+        getTasks().map(::mapTasks).collect { items ->
             reduce {
                 state.copy(
                     tasks = items

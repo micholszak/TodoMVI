@@ -37,7 +37,7 @@ class TasksViewModelTest {
         )
 
         testSubject.assert(initialState)
-        verify(mockGetTasks).execute()
+        verify(mockGetTasks).invoke()
     }
 
     @Test
@@ -82,7 +82,7 @@ class TasksViewModelTest {
     }
 
     private fun givenThatGetTasksReturnsWith(tasksFlow: Flow<List<Task>>) {
-        whenever(mockGetTasks.execute()).doReturn(tasksFlow)
+        whenever(mockGetTasks.invoke()).doReturn(tasksFlow)
     }
 
     private fun createTasks(size: Int = DEFAULT_SIZE): List<Task> =
