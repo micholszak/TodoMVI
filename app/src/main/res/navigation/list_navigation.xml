@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/todo_list"
-        android:name="pl.olszak.todo.feature.todos.TodoListFragment"
+        android:name="pl.olszak.todo.view.list.TaskListFragment"
         android:label="fragment_todo_list"
-        tools:layout="@layout/fragment_todo_list">
+        tools:layout="@layout/fragment_task_list">
 
         <action
-            android:id="@+id/action_add_todo"
+            android:id="@+id/action_add_task"
             app:destination="@+id/add_todo" />
     </fragment>
 
     <dialog
         android:id="@+id/add_todo"
-        android:name="pl.olszak.todo.feature.addition.view.AddTodoSheetFragment"
+        android:name="pl.olszak.todo.view.addition.AddTaskSheetFragment"
         android:label="fragment_add_todo"
-        tools:layout="@layout/fragment_add_todo_sheet" />
+        tools:layout="@layout/fragment_add_task_sheet" />
 
 </navigation>

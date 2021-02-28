@@ -1,15 +1,17 @@
 ext {
-    kotlin_version = '1.4.21-2'
+    kotlin_version = '1.4.31'
     detect_version = '1.15.0'
     dependency_version = '0.36.0'
-    lifecycle_version = "2.2.0"
-    nav_version = "2.3.2"
+    lifecycle_version = "2.3.0"
+    nav_version = "2.3.3"
     room_version = "2.2.6"
-    junit5_version = "5.7.0"
+    junit5_version = "5.7.1"
     coroutines_version = "1.4.2"
+    orbit_version = "3.0.1"
+    assertj_version = "3.19.0"
 
-    hilt_version = "2.31.2-alpha"
-    hilt_lifecycle_version = "1.0.0-alpha02"
+    hilt_version = "2.33-beta"
+    hilt_lifecycle_version = "1.0.0-alpha03"
 
     projectPlugins = [
             "com.android.tools.build:gradle:4.1.2",
@@ -18,14 +20,12 @@ ext {
             "de.mannodermaus.gradle.plugins:android-junit5:1.7.0.0"
     ]
 
-    kotlinStd = "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
     hiltAndroid = "com.google.dagger:hilt-android:$hilt_version"
     hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version"
     hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
     hiltAndroidxCompiler = "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
 
-    truth = "com.google.truth:truth:1.1.2"
+    turbine = "app.cash.turbine:turbine:0.4.0"
 
     hiltAndroidDependencies = [
             hiltAndroid,
@@ -36,61 +36,66 @@ ext {
             hiltAndroidxCompiler
     ]
 
+    applicationDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            desugaring: "com.android.tools:desugar_jdk_libs:1.0.10"
+    ]
+
     lifecycleDependencies = [
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
-            "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
-            "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
-            "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version",
-            "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version",
-            "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
-            "androidx.navigation:navigation-fragment-ktx:$nav_version",
-            "androidx.navigation:navigation-ui-ktx:$nav_version"
+            viewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            runtime: "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+            savedState: "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version",
+            commonJava8: "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version",
+            extensions: "androidx.lifecycle:lifecycle-extensions:2.2.0",
+            fragment: "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            navigationUI: "androidx.navigation:navigation-ui-ktx:$nav_version"
     ]
 
     roomDependencies = [
-            "androidx.room:room-runtime:$room_version",
-            "androidx.room:room-ktx:$room_version"
+            runtime: "androidx.room:room-runtime:$room_version",
+            core: "androidx.room:room-ktx:$room_version",
+            compiler: "androidx.room:room-compiler:$room_version"
     ]
-    roomCompiler = "androidx.room:room-compiler:$room_version"
+
 
     viewExtensionDependencies = [
-            "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0",
-            "jp.wasabeef:recyclerview-animators:4.0.1"
+            adapterDelegates: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0",
+            adapterDelegatesViewBinding: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.0",
+            recyclerAnimators:"jp.wasabeef:recyclerview-animators:4.0.2"
     ]
 
     coroutineDependencies = [
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
-            "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
-            "io.github.reactivecircus.flowbinding:flowbinding-android:1.0.0"
+            core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
+            android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
+            flowBinding: "io.github.reactivecircus.flowbinding:flowbinding-android:1.0.0",
+            orbitCore: "org.orbit-mvi:orbit-core:$orbit_version",
+            orbitViewModel: "org.orbit-mvi:orbit-viewmodel:$orbit_version",
     ]
 
     androidxCoreDependencies = [
-            "androidx.core:core-ktx:1.3.2",
-            "androidx.appcompat:appcompat:1.2.0",
-            "androidx.constraintlayout:constraintlayout:2.0.4"
+            core: "androidx.core:core-ktx:1.3.2",
+            appCompat: "androidx.appcompat:appcompat:1.2.0",
+            constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.4"
     ]
 
     testDependencies = [
-            "org.junit.jupiter:junit-jupiter-api:$junit5_version",
-            "org.junit.jupiter:junit-jupiter-params:$junit5_version",
-            "androidx.room:room-testing:$room_version",
-            "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
-            "app.cash.turbine:turbine:0.3.0",
-            truth,
-            "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
-            "androidx.arch.core:core-testing:2.1.0"
-    ]
-
-    testRuntimeDependencies = [
-            "org.junit.jupiter:junit-jupiter-engine:$junit5_version"
+            jupiterApi: "org.junit.jupiter:junit-jupiter-api:$junit5_version",
+            jupiterParams: "org.junit.jupiter:junit-jupiter-params:$junit5_version",
+            jupiterEngine: "org.junit.jupiter:junit-jupiter-engine:$junit5_version",
+            roomTesting: "androidx.room:room-testing:$room_version",
+            coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
+            assertJ: "org.assertj:assertj-core:$assertj_version",
+            turbine: turbine,
+            mockito: "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
+            androidxArch: "androidx.arch.core:core-testing:2.1.0",
+            orbit: "org.orbit-mvi:orbit-test:$orbit_version"
     ]
 
     androidTestDependencies = [
-            "junit:junit:4.13.1",
-            truth,
-            "androidx.test.ext:junit:1.1.2",
-            "androidx.test.espresso:espresso-core:3.3.0"
+            jUnit: "junit:junit:4.13.2",
+            turbine: turbine,
+            assertJ: "org.assertj:assertj-core:$assertj_version",
+            jUnitExtension: "androidx.test.ext:junit:1.1.2",
+            espresso: "androidx.test.espresso:espresso-core:3.3.0"
     ]
-
-    coreDesugaring = "com.android.tools:desugar_jdk_libs:1.0.10"
 }

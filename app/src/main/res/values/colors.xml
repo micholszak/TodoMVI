@@ -1,14 +1,23 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="primaryColor">#d95284</color>
+    <color name="primaryColor">@color/black</color>
     <color name="primaryLightColor">#ff84b3</color>
-    <color name="primaryDarkColor">#a41a58</color>
+    <color name="primaryDarkColor">@color/black</color>
     <color name="secondaryColor">#044bd9</color>
     <color name="secondaryLightColor">#6376ff</color>
     <color name="secondaryDarkColor">#0024a6</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#ffffff</color>
-    <color name="primaryTextInverseColor">#000000</color>
+    <color name="primaryTextColor">@color/white</color>
+    <color name="secondaryTextColor">@color/grey</color>
+    <color name="primaryTextInverseColor">@color/black</color>
     <color name="secondaryTextInverseColor">#000000</color>
-    <color name="controlNormalColor">#ffffff</color>
+    <color name="controlNormalColor">@color/black</color>
+
+    <color name="black">#050504</color>
+    <color name="yellowDark">#F1A200</color>
+    <color name="yellow">#EDC700</color>
+    <color name="brownDark">#684700</color>
+    <color name="brownLight">#CC9410</color>
+    <color name="brown">#9F6C00</color>
+    <color name="grey">#D6D6D3</color>
+    <color name="white">#ffffff</color>
 </resources>
