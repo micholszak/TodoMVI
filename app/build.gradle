@@ -51,7 +51,7 @@ android {
 }
 
 dependencies {
-    implementation kotlinStd
+    implementation applicationDependencies.kotlin
     implementation lifecycleDependencies.viewModel
     implementation lifecycleDependencies.runtime
     implementation lifecycleDependencies.commonJava8
@@ -96,5 +96,5 @@ dependencies {
     androidTestImplementation androidTestDependencies.jUnitExtension
     androidTestImplementation androidTestDependencies.espresso
 
-    coreLibraryDesugaring coreDesugaring
+    coreLibraryDesugaring applicationDependencies.desugaring
 }

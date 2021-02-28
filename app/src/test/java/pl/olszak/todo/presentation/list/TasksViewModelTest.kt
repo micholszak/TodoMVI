@@ -18,7 +18,7 @@ import pl.olszak.todo.presentation.list.model.TodosViewState
 import pl.olszak.todo.view.list.model.TaskViewItem
 
 @ExtendWith(InstantTaskExecutorExtension::class)
-class TodosViewModelTest {
+class TasksViewModelTest {
 
     companion object {
         private const val DEFAULT_SIZE = 5
@@ -31,7 +31,7 @@ class TodosViewModelTest {
     fun `Start requesting for database updates during initialisation`() {
         givenThatGetTasksReturnsWith(flowOf(emptyList()))
         val initialState = TodosViewState()
-        val testSubject = TodosViewModel(mockGetTasks, dispatcherProvider).test(
+        val testSubject = TasksViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
@@ -46,7 +46,7 @@ class TodosViewModelTest {
         givenThatGetTasksReturnsWith(flowOf(firstTasks))
 
         val initialState = TodosViewState()
-        val viewModel = TodosViewModel(mockGetTasks, dispatcherProvider).test(
+        val viewModel = TasksViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
@@ -68,7 +68,7 @@ class TodosViewModelTest {
         )
 
         val initialState = TodosViewState()
-        val viewModel = TodosViewModel(mockGetTasks, dispatcherProvider).test(
+        val viewModel = TasksViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
@@ -77,22 +77,6 @@ class TodosViewModelTest {
                 { TodosViewState(tasks = createTaskViewItems(5)) },
                 { TodosViewState(tasks = createTaskViewItems(6)) },
                 { TodosViewState(tasks = createTaskViewItems(7)) }
-            )
-        }
-    }
-
-    @Test
-    fun `Sort data after request`() {
-        val initialState = TodosViewState(
-            tasks = createTaskViewItems().reversed()
-        )
-        val viewModel = TodosViewModel(mockGetTasks, dispatcherProvider).test(
-            initialState = initialState
-        )
-        viewModel.sortData()
-        viewModel.assert(initialState) {
-            states(
-                { TodosViewState(sorted = true, tasks = createTaskViewItems()) }
             )
         }
     }

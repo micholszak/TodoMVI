@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import pl.olszak.todo.R
-import pl.olszak.todo.databinding.FragmentAddTodoSheetBinding
+import pl.olszak.todo.databinding.FragmentAddTaskSheetBinding
 import pl.olszak.todo.presentation.addition.AddTaskViewModel
 import pl.olszak.todo.presentation.addition.model.AddTaskAction
 import pl.olszak.todo.presentation.addition.model.AddViewState
@@ -25,13 +25,13 @@ import pl.olszak.todo.view.common.viewBinding
 import reactivecircus.flowbinding.android.view.clicks
 
 @AndroidEntryPoint
-class AddTodoSheetFragment : BottomSheetDialogFragment() {
+class AddTaskSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         private const val THROTTLE_INTERVAL_MS = 200L
     }
 
-    private val binding: FragmentAddTodoSheetBinding by viewBinding(FragmentAddTodoSheetBinding::bind)
+    private val binding: FragmentAddTaskSheetBinding by viewBinding(FragmentAddTaskSheetBinding::bind)
     private val addTaskViewModel: AddTaskViewModel by viewModels()
     private val actions: Flow<AddTaskAction> by lazy {
         binding.createButton.clicks()
@@ -47,7 +47,7 @@ class AddTodoSheetFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(R.layout.fragment_add_todo_sheet, container, false)
+        inflater.inflate(R.layout.fragment_add_task_sheet, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

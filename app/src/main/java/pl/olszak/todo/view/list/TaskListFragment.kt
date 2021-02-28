@@ -9,34 +9,31 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import pl.olszak.todo.R
-import pl.olszak.todo.databinding.FragmentTodoListBinding
-import pl.olszak.todo.presentation.list.TodosViewModel
+import pl.olszak.todo.databinding.FragmentTaskListBinding
+import pl.olszak.todo.presentation.list.TasksViewModel
 import pl.olszak.todo.presentation.list.model.TodosViewState
 import pl.olszak.todo.view.common.ScaleAnimation
 import pl.olszak.todo.view.common.adapter.ItemAdapter
 import pl.olszak.todo.view.common.viewBinding
 import pl.olszak.todo.view.list.adapter.createTaskDelegate
-import kotlin.time.seconds
 
 @AndroidEntryPoint
-class TodoListFragment : Fragment(R.layout.fragment_todo_list) {
+class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
     private var listAdapter: ItemAdapter? = null
-    private val binding: FragmentTodoListBinding by viewBinding(FragmentTodoListBinding::bind)
+    private val binding: FragmentTaskListBinding by viewBinding(FragmentTaskListBinding::bind)
 
-    private val viewModel: TodosViewModel by viewModels()
+    private val viewModel: TasksViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.inflateMenu(R.menu.menu_todo_list)
         setupList()
         binding.addTask.setOnClickListener {
-            findNavController().navigate(R.id.action_add_todo)
+            findNavController().navigate(R.id.action_add_task)
         }
-        postDataSorting()
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.container.stateFlow.collect(::render)
         }
@@ -53,13 +50,6 @@ class TodoListFragment : Fragment(R.layout.fragment_todo_list) {
             itemAnimator = FadeInUpAnimator().apply {
                 addDuration = 200
             }
-        }
-    }
-
-    private fun postDataSorting() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            delay(10.seconds)
-            viewModel.sortData()
         }
     }
 

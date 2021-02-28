@@ -17,7 +17,7 @@ import pl.olszak.todo.view.list.model.TaskViewItem
 import javax.inject.Inject
 
 @HiltViewModel
-class TodosViewModel @Inject constructor(
+class TasksViewModel @Inject constructor(
     private val getTasks: GetTasks,
     dispatcherProvider: DispatcherProvider
 ) : ViewModel(), ContainerHost<TodosViewState, Unit> {
@@ -33,25 +33,11 @@ class TodosViewModel @Inject constructor(
             subscribeToDatabaseUpdates()
         }
 
-    fun sortData() = intent {
-        reduce {
-            state.copy(
-                sorted = true,
-                tasks = state.tasks.sortedBy(TaskViewItem::title)
-            )
-        }
-    }
-
     private fun subscribeToDatabaseUpdates() = intent {
         getTasks.execute().map(::mapTasks).collect { items ->
             reduce {
-                val newItems = if (state.sorted)
-                    items.sortedBy(TaskViewItem::title)
-                else
-                    items
-
                 state.copy(
-                    tasks = newItems
+                    tasks = items
                 )
             }
         }
