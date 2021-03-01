@@ -12,19 +12,19 @@ import org.orbitmvi.orbit.viewmodel.container
 import pl.olszak.todo.domain.DispatcherProvider
 import pl.olszak.todo.domain.interactor.GetTasks
 import pl.olszak.todo.domain.model.Task
-import pl.olszak.todo.presentation.list.model.TodosViewState
+import pl.olszak.todo.presentation.list.model.TasksViewState
 import pl.olszak.todo.view.list.model.TaskViewItem
 import javax.inject.Inject
 
 @HiltViewModel
 class TasksViewModel @Inject constructor(
     private val getTasks: GetTasks,
-    dispatcherProvider: DispatcherProvider
-) : ViewModel(), ContainerHost<TodosViewState, Unit> {
+    dispatcherProvider: DispatcherProvider,
+) : ViewModel(), ContainerHost<TasksViewState, Unit> {
 
-    override val container: Container<TodosViewState, Unit> =
+    override val container: Container<TasksViewState, Unit> =
         container(
-            initialState = TodosViewState(),
+            initialState = TasksViewState(),
             settings = Container.Settings(
                 backgroundDispatcher = dispatcherProvider.io,
                 orbitDispatcher = dispatcherProvider.default
@@ -35,11 +35,7 @@ class TasksViewModel @Inject constructor(
 
     private fun subscribeToDatabaseUpdates() = intent {
         getTasks().map(::mapTasks).collect { items ->
-            reduce {
-                state.copy(
-                    tasks = items
-                )
-            }
+            reduce { state.copy(tasks = items) }
         }
     }
 

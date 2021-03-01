@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.collect
 import pl.olszak.todo.R
 import pl.olszak.todo.databinding.FragmentTaskListBinding
 import pl.olszak.todo.presentation.list.TasksViewModel
-import pl.olszak.todo.presentation.list.model.TodosViewState
+import pl.olszak.todo.presentation.list.model.TasksViewState
 import pl.olszak.todo.view.common.ScaleAnimation
 import pl.olszak.todo.view.common.adapter.ItemAdapter
-import pl.olszak.todo.view.common.viewBinding
+import pl.olszak.todo.view.common.binding.viewBinding
 import pl.olszak.todo.view.list.adapter.createTaskDelegate
 
 @AndroidEntryPoint
@@ -53,7 +53,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         }
     }
 
-    private fun render(state: TodosViewState) {
+    private fun render(state: TasksViewState) {
         listAdapter?.items = state.tasks
     }
 }
