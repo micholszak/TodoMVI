@@ -1,14 +1,12 @@
 package pl.olszak.todo.presentation.addition
 
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.orbitmvi.orbit.assert
 import org.orbitmvi.orbit.test
+import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.domain.InstantTaskExecutorExtension
 import pl.olszak.todo.domain.TestDispatcherProvider
 import pl.olszak.todo.domain.interactor.AddTask
@@ -18,8 +16,12 @@ import pl.olszak.todo.presentation.addition.model.AddTaskViewState
 @ExtendWith(InstantTaskExecutorExtension::class)
 class AddTaskViewModelTest {
 
-    private val addTask: AddTask = mock()
     private val dispatcherProvider = TestDispatcherProvider()
+    private val mockTaskDao: TaskDao = mock()
+    private val addTask = AddTask(
+        taskDao = mockTaskDao,
+        dispatcherProvider = dispatcherProvider
+    )
 
     @Test
     fun `Start with initial state`() {
@@ -32,7 +34,6 @@ class AddTaskViewModelTest {
 
     @Test
     fun `Emit error event given that adding task fails`() = runBlockingTest {
-        givenAddTaskThrowsError()
         val initialState = AddTaskViewState.Idle
         val viewModel = AddTaskViewModel(addTask, dispatcherProvider)
             .test(initialState)
@@ -60,9 +61,5 @@ class AddTaskViewModelTest {
                 { AddTaskViewState.Added }
             )
         }
-    }
-
-    private suspend fun givenAddTaskThrowsError() {
-        whenever(addTask.invoke(any())).doThrow(IllegalArgumentException())
     }
 }

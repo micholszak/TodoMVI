@@ -2,9 +2,7 @@ package pl.olszak.todo.presentation.addition
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -13,6 +11,7 @@ import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import pl.olszak.todo.domain.DispatcherProvider
 import pl.olszak.todo.domain.interactor.AddTask
+import pl.olszak.todo.domain.model.AddTaskResult
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.addition.model.AddTaskSideEffect
 import pl.olszak.todo.presentation.addition.model.AddTaskViewState
@@ -34,16 +33,18 @@ class AddTaskViewModel @Inject constructor(
         )
 
     fun addTaskWith(name: String) = intent {
-        flow {
-            emit(AddTaskViewState.Pending)
-            val task = Task(title = name)
-            addTask(task)
-            emit(AddTaskViewState.Added)
-        }.catch {
-            emit(AddTaskViewState.Idle)
-            postSideEffect(AddTaskSideEffect.EmptyFieldError)
-        }.collect { state ->
-            reduce { state }
+        val task = Task(title = name)
+        addTask(task = task).collect { result ->
+            reduce {
+                when (result) {
+                    is AddTaskResult.Pending -> AddTaskViewState.Pending
+                    is AddTaskResult.Success -> AddTaskViewState.Added
+                    is AddTaskResult.Failure -> AddTaskViewState.Idle
+                }
+            }
+            if (result is AddTaskResult.Failure) {
+                postSideEffect(AddTaskSideEffect.EmptyFieldError)
+            }
         }
     }
 }
