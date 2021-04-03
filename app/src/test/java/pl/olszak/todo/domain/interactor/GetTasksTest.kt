@@ -15,7 +15,7 @@ import pl.olszak.todo.cache.model.TaskEntity
 class GetTasksTest {
     private val mockTaskDao: TaskDao = mock()
 
-    private val getTodos = GetTasks(
+    private val getTasks = GetTasks(
         taskDao = mockTaskDao
     )
 
@@ -23,7 +23,7 @@ class GetTasksTest {
     fun `Retrieve tasks from repository`() = runBlockingTest {
         givenGetAllTasksOperates()
 
-        getTodos.execute().test {
+        getTasks().test {
             val tasks = expectItem()
             assertThat(tasks).hasSize(0)
             expectComplete()
@@ -44,7 +44,7 @@ class GetTasksTest {
         }
 
         givenGetAllTasksOperates(returnedEntities = entities)
-        getTodos.execute().test {
+        getTasks().test {
             val tasks = expectItem()
             tasks.forEach { task ->
                 assertThat(task.title).isEqualTo(title)

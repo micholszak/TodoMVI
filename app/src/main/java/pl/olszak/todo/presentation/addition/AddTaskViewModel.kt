@@ -1,75 +1,50 @@
 package pl.olszak.todo.presentation.addition
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.scan
-import kotlinx.coroutines.launch
-import pl.olszak.todo.domain.ActionProcessor
-import pl.olszak.todo.domain.Reducer
+import org.orbitmvi.orbit.Container
+import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.postSideEffect
+import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.viewmodel.container
+import pl.olszak.todo.domain.DispatcherProvider
 import pl.olszak.todo.domain.interactor.AddTask
+import pl.olszak.todo.domain.model.AddTaskResult
 import pl.olszak.todo.domain.model.Task
-import pl.olszak.todo.presentation.addition.model.AddTaskAction
-import pl.olszak.todo.presentation.addition.model.AddTaskResult
-import pl.olszak.todo.presentation.addition.model.AddViewState
-import pl.olszak.todo.presentation.addition.model.FieldError
-import pl.olszak.todo.view.common.model.ViewStateEvent
+import pl.olszak.todo.presentation.addition.model.AddTaskSideEffect
+import pl.olszak.todo.presentation.addition.model.AddTaskViewState
 import javax.inject.Inject
 
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
-    private val addTask: AddTask
-) : ViewModel() {
+    private val addTask: AddTask,
+    dispatcherProvider: DispatcherProvider,
+) : ViewModel(), ContainerHost<AddTaskViewState, AddTaskSideEffect> {
 
-    private val mutableState: MutableStateFlow<AddViewState> = MutableStateFlow(AddViewState())
-    val state: StateFlow<AddViewState> = mutableState
-
-    private val reducer: Reducer<AddViewState, AddTaskResult> = { previous, result ->
-        when (result) {
-            is AddTaskResult.Pending -> previous.copy(
-                isLoading = true
+    override val container: Container<AddTaskViewState, AddTaskSideEffect> =
+        container(
+            initialState = AddTaskViewState.Idle,
+            settings = Container.Settings(
+                backgroundDispatcher = dispatcherProvider.io,
+                orbitDispatcher = dispatcherProvider.default,
             )
-            is AddTaskResult.Added -> AddViewState(
-                isLoading = false,
-                isTaskAdded = true
-            )
-            is AddTaskResult.Failure -> previous.copy(
-                isLoading = false,
-                errorEvent = ViewStateEvent(FieldError.TITLE)
-            )
-        }
-    }
+        )
 
-    private val actionProcessor: ActionProcessor<AddTaskAction, AddTaskResult> = { intent ->
-        when (intent) {
-            is AddTaskAction.ProcessTask -> addTaskToStore(intent.taskTitle)
-        }
-    }
-
-    fun subscribeToActions(actions: Flow<AddTaskAction>) {
-        viewModelScope.launch {
-            actions.flatMapMerge(transform = actionProcessor)
-                .scan(AddViewState(), reducer)
-                .collect { newState ->
-                    mutableState.value = newState
+    fun addTaskWith(name: String) = intent {
+        val task = Task(title = name)
+        addTask(task = task).collect { result ->
+            reduce {
+                when (result) {
+                    is AddTaskResult.Pending -> AddTaskViewState.Pending
+                    is AddTaskResult.Success -> AddTaskViewState.Added
+                    is AddTaskResult.Failure -> AddTaskViewState.Idle
                 }
+            }
+            if (result is AddTaskResult.Failure) {
+                postSideEffect(AddTaskSideEffect.EmptyFieldError)
+            }
         }
     }
-
-    private fun addTaskToStore(title: String): Flow<AddTaskResult> =
-        flow {
-            emit(AddTaskResult.Pending)
-            val task = Task(title = title)
-            addTask(task)
-            emit(AddTaskResult.Added)
-        }.catch {
-            emit(AddTaskResult.Failure)
-        }
 }

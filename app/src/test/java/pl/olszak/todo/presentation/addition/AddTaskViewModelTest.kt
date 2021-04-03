@@ -1,71 +1,65 @@
 package pl.olszak.todo.presentation.addition
 
-import app.cash.turbine.test
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.RegisterExtension
-import pl.olszak.todo.domain.CoroutinesTestExtension
+import org.junit.jupiter.api.extension.ExtendWith
+import org.orbitmvi.orbit.assert
+import org.orbitmvi.orbit.test
+import pl.olszak.todo.cache.TaskDao
+import pl.olszak.todo.domain.InstantTaskExecutorExtension
+import pl.olszak.todo.domain.TestDispatcherProvider
 import pl.olszak.todo.domain.interactor.AddTask
-import pl.olszak.todo.presentation.addition.model.AddTaskAction
-import pl.olszak.todo.presentation.addition.model.AddViewState
+import pl.olszak.todo.presentation.addition.model.AddTaskSideEffect
+import pl.olszak.todo.presentation.addition.model.AddTaskViewState
 
+@ExtendWith(InstantTaskExecutorExtension::class)
 class AddTaskViewModelTest {
 
-    @JvmField
-    @RegisterExtension
-    val coroutinesExtension = CoroutinesTestExtension()
+    private val dispatcherProvider = TestDispatcherProvider()
+    private val mockTaskDao: TaskDao = mock()
+    private val addTask = AddTask(
+        taskDao = mockTaskDao,
+        dispatcherProvider = dispatcherProvider
+    )
 
-    private val addTask: AddTask = mock()
-    private lateinit var addTaskViewModel: AddTaskViewModel
+    @Test
+    fun `Start with initial state`() {
+        val initialState = AddTaskViewState.Idle
+        val viewModel = AddTaskViewModel(addTask, dispatcherProvider)
+            .test(AddTaskViewState.Idle)
 
-    @BeforeEach
-    fun setUp() {
-        addTaskViewModel = AddTaskViewModel(addTask)
+        viewModel.assert(initialState)
     }
 
     @Test
-    fun `Start with initial state`() =
-        coroutinesExtension.runBlockingTest {
-            addTaskViewModel.state.test {
-                addTaskViewModel.subscribeToActions(emptyFlow())
-                assertThat(AddViewState()).isEqualTo(expectItem())
-            }
+    fun `Emit error event given that adding task fails`() = runBlockingTest {
+        val initialState = AddTaskViewState.Idle
+        val viewModel = AddTaskViewModel(addTask, dispatcherProvider)
+            .test(initialState)
+        viewModel.addTaskWith(name = "")
+        viewModel.assert(initialState) {
+            states(
+                { AddTaskViewState.Pending },
+                { AddTaskViewState.Idle }
+            )
+            postedSideEffects(
+                AddTaskSideEffect.EmptyFieldError,
+            )
         }
-
-    @Test
-    fun `Emit error event given that adding task fails`() =
-        coroutinesExtension.runBlockingTest {
-            givenAddTaskThrowsError()
-            addTaskViewModel.state.test {
-                val input = flowOf(AddTaskAction.ProcessTask(taskTitle = ""))
-                addTaskViewModel.subscribeToActions(input)
-                assertThat(AddViewState()).isEqualTo(expectItem())
-                assertThat(AddViewState(isLoading = true)).isEqualTo(expectItem())
-                assertThat(expectItem().errorEvent).isNotNull()
-            }
-        }
+    }
 
     @Test
     fun `Indicate task added to view`() {
-        coroutinesExtension.runBlockingTest {
-            addTaskViewModel.state.test {
-                val input = flowOf(AddTaskAction.ProcessTask(taskTitle = ""))
-                addTaskViewModel.subscribeToActions(input)
-                assertThat(AddViewState()).isEqualTo(expectItem())
-                assertThat(AddViewState(isLoading = true)).isEqualTo(expectItem())
-                assertThat(AddViewState(isTaskAdded = true)).isEqualTo(expectItem())
-            }
+        val initialState = AddTaskViewState.Idle
+        val viewModel = AddTaskViewModel(addTask, dispatcherProvider)
+            .test(initialState)
+        viewModel.addTaskWith("some name")
+        viewModel.assert(initialState) {
+            states(
+                { AddTaskViewState.Pending },
+                { AddTaskViewState.Added }
+            )
         }
-    }
-
-    private suspend fun givenAddTaskThrowsError() {
-        whenever(addTask.invoke(any())).doThrow(IllegalArgumentException())
     }
 }

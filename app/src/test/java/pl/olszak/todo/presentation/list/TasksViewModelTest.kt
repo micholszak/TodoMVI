@@ -14,7 +14,7 @@ import pl.olszak.todo.domain.InstantTaskExecutorExtension
 import pl.olszak.todo.domain.TestDispatcherProvider
 import pl.olszak.todo.domain.interactor.GetTasks
 import pl.olszak.todo.domain.model.Task
-import pl.olszak.todo.presentation.list.model.TodosViewState
+import pl.olszak.todo.presentation.list.model.TasksViewState
 import pl.olszak.todo.view.list.model.TaskViewItem
 
 @ExtendWith(InstantTaskExecutorExtension::class)
@@ -30,14 +30,14 @@ class TasksViewModelTest {
     @Test
     fun `Start requesting for database updates during initialisation`() {
         givenThatGetTasksReturnsWith(flowOf(emptyList()))
-        val initialState = TodosViewState()
-        val testSubject = TasksViewModel(mockGetTasks, dispatcherProvider).test(
+        val initialState = TasksViewState()
+        val viewModel = TasksViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
 
-        testSubject.assert(initialState)
-        verify(mockGetTasks).execute()
+        viewModel.assert(initialState)
+        verify(mockGetTasks).invoke()
     }
 
     @Test
@@ -45,14 +45,14 @@ class TasksViewModelTest {
         val firstTasks = createTasks()
         givenThatGetTasksReturnsWith(flowOf(firstTasks))
 
-        val initialState = TodosViewState()
+        val initialState = TasksViewState()
         val viewModel = TasksViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
         viewModel.assert(initialState) {
             states(
-                { TodosViewState(tasks = createTaskViewItems()) }
+                { TasksViewState(tasks = createTaskViewItems()) }
             )
         }
     }
@@ -67,22 +67,22 @@ class TasksViewModelTest {
             )
         )
 
-        val initialState = TodosViewState()
+        val initialState = TasksViewState()
         val viewModel = TasksViewModel(mockGetTasks, dispatcherProvider).test(
             initialState = initialState,
             runOnCreate = true
         )
         viewModel.assert(initialState) {
             states(
-                { TodosViewState(tasks = createTaskViewItems(5)) },
-                { TodosViewState(tasks = createTaskViewItems(6)) },
-                { TodosViewState(tasks = createTaskViewItems(7)) }
+                { TasksViewState(tasks = createTaskViewItems(5)) },
+                { TasksViewState(tasks = createTaskViewItems(6)) },
+                { TasksViewState(tasks = createTaskViewItems(7)) }
             )
         }
     }
 
     private fun givenThatGetTasksReturnsWith(tasksFlow: Flow<List<Task>>) {
-        whenever(mockGetTasks.execute()).doReturn(tasksFlow)
+        whenever(mockGetTasks.invoke()).doReturn(tasksFlow)
     }
 
     private fun createTasks(size: Int = DEFAULT_SIZE): List<Task> =

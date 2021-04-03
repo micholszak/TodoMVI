@@ -11,7 +11,7 @@ open class GetTasks @Inject constructor(
     private val taskDao: TaskDao,
 ) {
 
-    fun execute(): Flow<List<Task>> =
+    operator fun invoke(): Flow<List<Task>> =
         taskDao.getAllTasks()
             .map(::mapEntities)
 
