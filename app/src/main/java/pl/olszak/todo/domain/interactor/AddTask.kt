@@ -1,5 +1,6 @@
 package pl.olszak.todo.domain.interactor
 
+import android.database.SQLException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -27,7 +28,7 @@ class AddTask @Inject constructor(
         try {
             attemptToAddTask(task)
             emit(AddTaskResult.Success)
-        } catch (e: Exception) {
+        } catch (e: SQLException) {
             emit(AddTaskResult.Failure(e))
         }
     }.onStart {
