@@ -1,5 +1,6 @@
 package pl.olszak.todo.domain.interactor
 
+import android.database.SQLException
 import app.cash.turbine.test
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doThrow
@@ -70,13 +71,13 @@ class AddTaskTest {
 
     @Test
     fun `Fail the addition when service fails to process the request`() = runBlockingTest {
-        whenever(mockTaskDao.insertTask(any())).doThrow(IllegalStateException())
+        whenever(mockTaskDao.insertTask(any())).doThrow(SQLException())
 
         val task = Task(title = "not an empty title")
         addTask(task = task).test {
             assertThat(AddTaskResult.Pending).isEqualTo(expectItem())
             val failure = expectItem() as AddTaskResult.Failure
-            assertThat(failure.throwable).isInstanceOf(IllegalStateException::class.java)
+            assertThat(failure.throwable).isInstanceOf(SQLException::class.java)
             expectComplete()
         }
     }
