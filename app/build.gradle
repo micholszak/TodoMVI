@@ -77,8 +77,10 @@ dependencies {
     implementation coroutineDependencies.orbitCore
     implementation coroutineDependencies.orbitViewModel
 
-    implementation hiltAndroidDependencies
-    kapt hiltCompilers
+    implementation hiltAndroidDependencies.hiltAndroid
+    implementation hiltAndroidDependencies.hiltViewModel
+    kapt hiltCompilers.hiltAndroidCompiler
+    kapt hiltCompilers.hiltAndroidxCompiler
 
     testImplementation testDependencies.jupiterApi
     testImplementation testDependencies.jupiterParams

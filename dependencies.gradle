@@ -19,21 +19,16 @@ ext {
             "com.google.dagger:hilt-android-gradle-plugin:$hilt_version",
             "de.mannodermaus.gradle.plugins:android-junit5:1.7.0.0"
     ]
-
-    hiltAndroid = "com.google.dagger:hilt-android:$hilt_version"
-    hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version"
-    hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
-    hiltAndroidxCompiler = "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
-
     turbine = "app.cash.turbine:turbine:0.4.0"
 
     hiltAndroidDependencies = [
-            hiltAndroid,
-            hiltViewModel
+            hiltAndroid: "com.google.dagger:hilt-android:$hilt_version",
+            hiltViewModel: "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version",
     ]
     hiltCompilers = [
-            hiltAndroidCompiler,
-            hiltAndroidxCompiler
+            hiltCompiler: "com.google.dagger:hilt-compiler:$hilt_version",
+            hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hilt_version",
+            hiltAndroidxCompiler: "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
     ]
 
     applicationDependencies = [
