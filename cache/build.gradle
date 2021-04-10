@@ -15,9 +15,10 @@ android {
 
         kapt {
             arguments {
-                arg("room.schemaLocation", "$projectDir/cache/schemas")
+                arg("room.schemaLocation", "$projectDir/schemas")
             }
         }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -52,4 +53,10 @@ dependencies {
     testImplementation testDependencies.turbine
     testImplementation testDependencies.mockito
     testRuntimeOnly testDependencies.jupiterEngine
+
+    androidTestImplementation androidTestDependencies.jUnit
+    androidTestImplementation androidTestDependencies.turbine
+    androidTestImplementation androidTestDependencies.assertJ
+    androidTestImplementation androidTestDependencies.jUnitExtension
+    androidTestImplementation androidTestDependencies.espresso
 }
