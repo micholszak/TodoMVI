@@ -3,7 +3,7 @@ package com.shopper.cache.room
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
-import com.shopper.cache.room.model.CheckedProduct
+import com.shopper.cache.room.model.CheckedProductEntity
 import com.shopper.cache.room.model.ProductEntity
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
@@ -74,7 +74,7 @@ internal class ProductsDaoTest {
             val orange = expectItem().first()
             assertThat(orange.checked).isFalse
             productsDao.updateChecked(
-                product = CheckedProduct(
+                productEntity = CheckedProductEntity(
                     productId = orange.productId,
                     checked = true
                 )

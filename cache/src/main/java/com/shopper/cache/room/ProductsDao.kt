@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.shopper.cache.room.model.CheckedProduct
+import com.shopper.cache.room.model.CheckedProductEntity
 import com.shopper.cache.room.model.ProductEntity
 import com.shopper.cache.room.model.ProductTableInfo.TABLE_NAME
 import kotlinx.coroutines.flow.Flow
@@ -20,5 +20,5 @@ internal interface ProductsDao {
     suspend fun addProduct(product: ProductEntity)
 
     @Update(entity = ProductEntity::class)
-    suspend fun updateChecked(product: CheckedProduct)
+    suspend fun updateChecked(productEntity: CheckedProductEntity)
 }

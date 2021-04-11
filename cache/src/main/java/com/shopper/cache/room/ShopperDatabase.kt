@@ -12,7 +12,6 @@ internal abstract class ShopperDatabase : RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "shopperDatabase"
 
-        @Synchronized
         fun getInstance(context: Context): ShopperDatabase =
             Room.databaseBuilder(context, ShopperDatabase::class.java, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
