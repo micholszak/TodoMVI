@@ -1,6 +1,10 @@
 package com.shopper.cache.room.model
 
-data class CheckedProduct(
+import androidx.room.ColumnInfo
+
+internal data class CheckedProduct(
+    @ColumnInfo(name = ProductTableInfo.COLUMN_ID)
     val productId: Long,
+    @ColumnInfo(name = ProductTableInfo.COLUMN_CHECKED)
     val checked: Boolean,
 )

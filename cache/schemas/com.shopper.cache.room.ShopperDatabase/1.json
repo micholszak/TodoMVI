@@ -2,34 +2,34 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5246efa6c71e8b87575219ac605c9ea5",
+    "identityHash": "2c5d7d4803414d52f0de28a177f40d01",
     "entities": [
       {
-        "tableName": "products",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`productId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `checked` INTEGER NOT NULL)",
+        "tableName": "PRODUCT",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`PRODUCT_ID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `NAME` TEXT NOT NULL, `CHECKED` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "productId",
-            "columnName": "productId",
+            "columnName": "PRODUCT_ID",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "name",
-            "columnName": "name",
+            "columnName": "NAME",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "checked",
-            "columnName": "checked",
+            "columnName": "CHECKED",
             "affinity": "INTEGER",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "productId"
+            "PRODUCT_ID"
           ],
           "autoGenerate": true
         },
@@ -40,7 +40,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5246efa6c71e8b87575219ac605c9ea5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2c5d7d4803414d52f0de28a177f40d01')"
     ]
   }
 }

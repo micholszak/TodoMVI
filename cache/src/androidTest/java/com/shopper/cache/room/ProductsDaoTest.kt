@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class ProductsDaoTest {
+internal class ProductsDaoTest {
 
     private lateinit var database: ShopperDatabase
     private lateinit var productsDao: ProductsDao

@@ -7,12 +7,13 @@ import androidx.room.Query
 import androidx.room.Update
 import com.shopper.cache.room.model.CheckedProduct
 import com.shopper.cache.room.model.ProductEntity
+import com.shopper.cache.room.model.ProductTableInfo.TABLE_NAME
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal interface ProductsDao {
 
-    @Query("SELECT * FROM products")
+    @Query("SELECT * FROM $TABLE_NAME")
     fun getProducts(): Flow<List<ProductEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
