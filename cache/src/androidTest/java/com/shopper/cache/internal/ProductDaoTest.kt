@@ -1,10 +1,11 @@
-package com.shopper.cache.room
+package com.shopper.cache.internal
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
-import com.shopper.cache.room.model.CheckedProductEntity
-import com.shopper.cache.room.model.ProductEntity
+import com.shopper.cache.internal.model.AddProductEntity
+import com.shopper.cache.internal.model.CheckedProductEntity
+import com.shopper.cache.internal.model.ProductEntity
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -12,10 +13,10 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-internal class ProductsDaoTest {
+internal class ProductDaoTest {
 
     private lateinit var database: ShopperDatabase
-    private lateinit var productsDao: ProductsDao
+    private lateinit var productDao: ProductDao
 
     @Before
     fun before() {
@@ -24,7 +25,7 @@ internal class ProductsDaoTest {
             ShopperDatabase::class.java
         ).allowMainThreadQueries()
             .build()
-        productsDao = database.productsDao()
+        productDao = database.productsDao()
     }
 
     @After
@@ -35,9 +36,9 @@ internal class ProductsDaoTest {
 
     @Test
     fun productAddsProperly() = runBlocking {
-        val product = ProductEntity(name = "orange")
-        productsDao.addProduct(product)
-        productsDao.getProducts().test {
+        val product = AddProductEntity(name = "orange")
+        productDao.addProduct(product)
+        productDao.getAllProducts().test {
             val products = expectItem()
             assertThat(products).hasSize(1)
             assertThat(products[0].name).isEqualTo("orange")
@@ -47,11 +48,11 @@ internal class ProductsDaoTest {
     @Test
     fun thereShouldBeNoDuplicatesInProducts() = runBlocking {
         repeat(5) {
-            val orange = ProductEntity(name = "orange")
-            productsDao.addProduct(product = orange)
+            val orange = AddProductEntity(name = "orange")
+            productDao.addProduct(entity = orange)
         }
 
-        productsDao.getProducts().test {
+        productDao.getAllProducts().test {
             val products = expectItem()
             assertThat(products).doesNotHaveDuplicates()
         }
@@ -59,22 +60,22 @@ internal class ProductsDaoTest {
 
     @Test
     fun daoShouldSendAnUpdateEveryTimeWhenProductIsAdded() = runBlocking {
-        productsDao.getProducts().test {
-            productsDao.addProduct(product = ProductEntity(name = "orange"))
+        productDao.getAllProducts().test {
+            productDao.addProduct(entity = AddProductEntity(name = "orange"))
             assertThat(expectItem()).hasSize(1)
-            productsDao.addProduct(product = ProductEntity(name = "apple"))
+            productDao.addProduct(entity = AddProductEntity(name = "apple"))
             assertThat(expectItem()).hasSize(2)
         }
     }
 
     @Test
     fun changeCheckedStateOfRequestedItem() = runBlocking {
-        productsDao.addProduct(product = ProductEntity(name = "orange"))
-        productsDao.getProducts().test {
+        productDao.addProduct(entity = AddProductEntity(name = "orange"))
+        productDao.getAllProducts().test {
             val orange = expectItem().first()
             assertThat(orange.checked).isFalse
-            productsDao.updateChecked(
-                productEntity = CheckedProductEntity(
+            productDao.updateChecked(
+                entity = CheckedProductEntity(
                     productId = orange.productId,
                     checked = true
                 )

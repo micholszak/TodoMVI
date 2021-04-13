@@ -1,7 +1,7 @@
-package com.shopper.cache.room.composition
+package com.shopper.cache.internal.composition
 
 import android.app.Application
-import com.shopper.cache.room.ShopperDatabase
+import com.shopper.cache.internal.ShopperDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ internal class DatabaseModule {
     @Provides
     @Singleton
     fun provideShopperDatabase(application: Application): ShopperDatabase =
-        ShopperDatabase.getInstance(application)
+        ShopperDatabase.newInstance(application)
 
     @Provides
     @Singleton

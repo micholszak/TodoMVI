@@ -1,4 +1,4 @@
-package com.shopper.cache.room.model
+package com.shopper.cache.internal.model
 
 import androidx.room.ColumnInfo
 
