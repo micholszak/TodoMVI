@@ -11,12 +11,10 @@ buildscript {
 }
 
 plugins {
-    id "io.gitlab.arturbosch.detekt" version "$detect_version"
     id "com.github.ben-manes.versions" version "$dependency_version"
 }
 
 allprojects {
-    apply from: "$rootDir/detect.gradle"
     apply from: "$rootDir/ktlint.gradle"
     repositories {
         google()
@@ -25,29 +23,8 @@ allprojects {
     }
 }
 
-tasks.detekt.jvmTarget = "1.8"
-
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-task detectAll(type: io.gitlab.arturbosch.detekt.Detekt) {
-    description = "Runs over whole code base without the starting overhead for each module."
-    buildUponDefaultConfig = true
-    autoCorrect = true
-    parallel = true
-    setSource(files(projectDir))
-    config.setFrom(files("$rootDir/detekt.yml"))
-    include("**/*.kt")
-    include("**/*.kts")
-    exclude("**/build/**")
-    exclude("**/buildSrc/**")
-    exclude("**/test/**/*.kt")
-    reports {
-        xml.enabled = false
-        html.enabled = true
-        txt.enabled = false
-    }
 }
 
 def isNonStable = { String version ->

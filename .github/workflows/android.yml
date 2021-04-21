@@ -27,7 +27,5 @@ jobs:
         java-version: 1.8
     - name: Lint the project
       run: ./gradlew ktlint
-    - name: Detect any errors
-      run: ./gradlew detectAll
     - name: Build with Gradle
       run: ./gradlew build
