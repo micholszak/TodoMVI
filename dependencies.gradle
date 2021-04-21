@@ -1,6 +1,5 @@
 ext {
     kotlin_version = '1.4.31'
-    detect_version = '1.15.0'
     dependency_version = '0.36.0'
     lifecycle_version = "2.3.0"
     nav_version = "2.3.3"
