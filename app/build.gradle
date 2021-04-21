@@ -18,12 +18,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas")
-            }
-        }
     }
 
     buildTypes {
@@ -51,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation project(":cache")
     implementation applicationDependencies.kotlin
     implementation lifecycleDependencies.viewModel
     implementation lifecycleDependencies.runtime
@@ -67,18 +62,16 @@ dependencies {
     implementation viewExtensionDependencies.adapterDelegatesViewBinding
     implementation viewExtensionDependencies.recyclerAnimators
 
-    implementation roomDependencies.runtime
-    implementation roomDependencies.core
-    kapt roomDependencies.compiler
-
     implementation coroutineDependencies.core
     implementation coroutineDependencies.android
     implementation coroutineDependencies.flowBinding
     implementation coroutineDependencies.orbitCore
     implementation coroutineDependencies.orbitViewModel
 
-    implementation hiltAndroidDependencies
-    kapt hiltCompilers
+    implementation hiltAndroidDependencies.hiltAndroid
+    implementation hiltAndroidDependencies.hiltViewModel
+    kapt hiltCompilers.hiltAndroidCompiler
+    kapt hiltCompilers.hiltAndroidxCompiler
 
     testImplementation testDependencies.jupiterApi
     testImplementation testDependencies.jupiterParams
