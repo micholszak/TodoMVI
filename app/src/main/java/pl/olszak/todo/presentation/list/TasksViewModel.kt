@@ -43,7 +43,6 @@ class TasksViewModel @Inject constructor(
         return tasks.map { task ->
             TaskViewItem(
                 title = task.title,
-                description = task.description
             )
         }
     }

@@ -1,5 +1,6 @@
 package com.shopper.cache.internal.model
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,6 +9,7 @@ import com.shopper.cache.internal.model.ProductTableInfo.COLUMN_ID
 import com.shopper.cache.internal.model.ProductTableInfo.COLUMN_NAME
 import com.shopper.cache.internal.model.ProductTableInfo.TABLE_NAME
 
+@Keep
 @Entity(tableName = TABLE_NAME)
 internal data class ProductEntity(
     @ColumnInfo(name = COLUMN_ID)

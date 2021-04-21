@@ -1,21 +1,24 @@
 package com.shopper.cache.composition
 
+import android.content.Context
 import com.shopper.cache.ProductCache
 import com.shopper.cache.ProductRoomCache
-import com.shopper.cache.internal.composition.DatabaseModule
-import dagger.Binds
+import com.shopper.cache.internal.ShopperDatabase
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@Module(
-    includes = [
-        DatabaseModule::class
-    ]
-)
+@Module
 @InstallIn(SingletonComponent::class)
 abstract class CacheModule {
 
-    @Binds
-    internal abstract fun bindProductCache(cache: ProductRoomCache): ProductCache
+    @Provides
+    @Singleton
+    internal fun provideProductCache(@ApplicationContext context: Context): ProductCache {
+        val database = ShopperDatabase.getInstance(context)
+        return ProductRoomCache(database.productsDao())
+    }
 }

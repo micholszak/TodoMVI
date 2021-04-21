@@ -10,8 +10,8 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import pl.olszak.todo.domain.DispatcherProvider
-import pl.olszak.todo.domain.interactor.AddTask
-import pl.olszak.todo.domain.model.AddTaskResult
+import pl.olszak.todo.domain.interactor.AddProduct
+import pl.olszak.todo.domain.model.AddProductResult
 import pl.olszak.todo.domain.model.Task
 import pl.olszak.todo.presentation.addition.model.AddTaskSideEffect
 import pl.olszak.todo.presentation.addition.model.AddTaskViewState
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddTaskViewModel @Inject constructor(
-    private val addTask: AddTask,
+    private val addProduct: AddProduct,
     dispatcherProvider: DispatcherProvider,
 ) : ViewModel(), ContainerHost<AddTaskViewState, AddTaskSideEffect> {
 
@@ -34,15 +34,15 @@ class AddTaskViewModel @Inject constructor(
 
     fun addTaskWith(name: String) = intent {
         val task = Task(title = name)
-        addTask(task = task).collect { result ->
+        addProduct(task = task).collect { result ->
             reduce {
                 when (result) {
-                    is AddTaskResult.Pending -> AddTaskViewState.Pending
-                    is AddTaskResult.Success -> AddTaskViewState.Added
-                    is AddTaskResult.Failure -> AddTaskViewState.Idle
+                    is AddProductResult.Pending -> AddTaskViewState.Pending
+                    is AddProductResult.Success -> AddTaskViewState.Added
+                    is AddProductResult.Failure -> AddTaskViewState.Idle
                 }
             }
-            if (result is AddTaskResult.Failure) {
+            if (result is AddProductResult.Failure) {
                 postSideEffect(AddTaskSideEffect.EmptyFieldError)
             }
         }

@@ -1,25 +1,25 @@
 package pl.olszak.todo.presentation.addition
 
 import com.nhaarman.mockitokotlin2.mock
+import com.shopper.cache.ProductCache
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.orbitmvi.orbit.assert
 import org.orbitmvi.orbit.test
-import pl.olszak.todo.cache.TaskDao
 import pl.olszak.todo.domain.InstantTaskExecutorExtension
 import pl.olszak.todo.domain.TestDispatcherProvider
-import pl.olszak.todo.domain.interactor.AddTask
+import pl.olszak.todo.domain.interactor.AddProduct
 import pl.olszak.todo.presentation.addition.model.AddTaskSideEffect
 import pl.olszak.todo.presentation.addition.model.AddTaskViewState
 
 @ExtendWith(InstantTaskExecutorExtension::class)
-class AddTaskViewModelTest {
+class AddProductViewModelTest {
 
     private val dispatcherProvider = TestDispatcherProvider()
-    private val mockTaskDao: TaskDao = mock()
-    private val addTask = AddTask(
-        taskDao = mockTaskDao,
+    private val mockProductCache: ProductCache = mock()
+    private val addTask = AddProduct(
+        productCache = mockProductCache,
         dispatcherProvider = dispatcherProvider
     )
 

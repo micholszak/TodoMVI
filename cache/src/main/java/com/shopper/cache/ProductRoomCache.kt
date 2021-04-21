@@ -8,11 +8,8 @@ import com.shopper.cache.model.CachedProduct
 import com.shopper.cache.model.CheckedProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-internal class ProductRoomCache @Inject constructor(
+internal class ProductRoomCache(
     private val productDao: ProductDao
 ) : ProductCache {
 

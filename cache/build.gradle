@@ -38,7 +38,7 @@ android {
 dependencies {
     implementation applicationDependencies.kotlin
     implementation roomDependencies.runtime
-    implementation roomDependencies.core
+    implementation roomDependencies.ktx
     kapt roomDependencies.compiler
 
     implementation coroutineDependencies.core
