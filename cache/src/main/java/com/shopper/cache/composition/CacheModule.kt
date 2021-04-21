@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class CacheModule {
+class CacheModule {
 
     @Provides
     @Singleton
