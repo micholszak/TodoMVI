@@ -5,7 +5,6 @@ import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
 import com.shopper.cache.internal.model.AddProductEntity
 import com.shopper.cache.internal.model.CheckedProductEntity
-import com.shopper.cache.internal.model.ProductEntity
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
