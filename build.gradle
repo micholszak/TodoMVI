@@ -3,7 +3,6 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
     }
     dependencies {
         classpath projectPlugins
@@ -12,6 +11,7 @@ buildscript {
 
 plugins {
     id "com.github.ben-manes.versions" version "$dependency_version"
+    id 'com.autonomousapps.dependency-analysis' version "$dependency_analysis_version"
 }
 
 allprojects {

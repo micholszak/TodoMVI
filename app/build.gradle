@@ -64,12 +64,10 @@ dependencies {
 
     implementation coroutineDependencies.core
     implementation coroutineDependencies.android
-    implementation coroutineDependencies.flowBinding
     implementation coroutineDependencies.orbitCore
     implementation coroutineDependencies.orbitViewModel
 
     implementation hiltAndroidDependencies.hiltAndroid
-    implementation hiltAndroidDependencies.hiltViewModel
     kapt hiltCompilers.hiltAndroidCompiler
     kapt hiltCompilers.hiltAndroidxCompiler
 
