@@ -23,7 +23,6 @@ ext {
 
     hiltAndroidDependencies = [
             hiltAndroid: "com.google.dagger:hilt-android:$hilt_version",
-            hiltViewModel: "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version",
     ]
     hiltCompilers = [
             hiltCompiler: "com.google.dagger:hilt-compiler:$hilt_version",
@@ -62,7 +61,6 @@ ext {
     coroutineDependencies = [
             core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
             android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
-            flowBinding: "io.github.reactivecircus.flowbinding:flowbinding-android:1.0.0",
             orbitCore: "org.orbit-mvi:orbit-core:$orbit_version",
             orbitViewModel: "org.orbit-mvi:orbit-viewmodel:$orbit_version",
     ]
