@@ -24,6 +24,14 @@ allprojects {
         google()
         mavenCentral()
     }
+
+    gradle.projectsEvaluated {
+        tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+            kotlinOptions {
+                allWarningsAsErrors = true
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {
