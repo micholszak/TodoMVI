@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion targetSdkVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion minSdkVersion
+        targetSdkVersion targetSdkVersion
 
         kapt {
             arguments {
