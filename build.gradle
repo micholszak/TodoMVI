@@ -14,6 +14,7 @@ plugins {
     id "com.github.ben-manes.versions" version "$dependency_version"
     id "com.autonomousapps.dependency-analysis" version "$dependency_analysis_version"
     id "org.jlleitschuh.gradle.ktlint" version "$ktlint_plugin_version"
+    id "com.osacky.doctor" version "$gradle_doctor_version"
 }
 
 allprojects {

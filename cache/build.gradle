@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion targetSdkVersion
+    compileSdkVersion rootProject.targetSdkVersion
 
     defaultConfig {
-        minSdkVersion minSdkVersion
-        targetSdkVersion targetSdkVersion
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
 
         kapt {
             arguments {

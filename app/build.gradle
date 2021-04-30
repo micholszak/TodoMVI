@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion targetSdkVersion
+    compileSdkVersion rootProject.targetSdkVersion
 
     defaultConfig {
         applicationId "pl.olszak.todo"
-        minSdkVersion minSdkVersion
-        targetSdkVersion targetSdkVersion
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
 

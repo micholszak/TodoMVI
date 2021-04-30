@@ -13,6 +13,7 @@ ext {
     assertj_version = "3.19.0"
     dependency_analysis_version = "0.72.0"
     ktlint_plugin_version = "10.0.0"
+    gradle_doctor_version = "0.7.0"
 
     hilt_version = "2.35.1"
     hilt_lifecycle_version = "1.0.0-beta01"
