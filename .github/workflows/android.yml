@@ -26,6 +26,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Lint the project
-      run: ./gradlew ktlint
+      run: ./gradlew ktlintCheck
     - name: Build with Gradle
       run: ./gradlew build
