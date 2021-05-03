@@ -3,6 +3,7 @@ buildscript {
 
     repositories {
         google()
+        mavenCentral()
     }
     dependencies {
         classpath projectPlugins
@@ -11,15 +12,25 @@ buildscript {
 
 plugins {
     id "com.github.ben-manes.versions" version "$dependency_version"
-    id 'com.autonomousapps.dependency-analysis' version "$dependency_analysis_version"
+    id "com.autonomousapps.dependency-analysis" version "$dependency_analysis_version"
+    id "org.jlleitschuh.gradle.ktlint" version "$ktlint_plugin_version"
+    id "com.osacky.doctor" version "$gradle_doctor_version"
 }
 
 allprojects {
-    apply from: "$rootDir/ktlint.gradle"
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
+
     repositories {
         google()
-        jcenter()
         mavenCentral()
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+            kotlinOptions {
+                allWarningsAsErrors = true
+            }
+        }
     }
 }
 
