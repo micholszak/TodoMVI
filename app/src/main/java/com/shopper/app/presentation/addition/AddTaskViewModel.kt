@@ -1,14 +1,13 @@
 package com.shopper.app.presentation.addition
 
 import androidx.lifecycle.ViewModel
-import com.shopper.app.domain.DispatcherProvider
-import com.shopper.app.domain.interactor.AddProduct
-import com.shopper.app.domain.model.AddProductResult
-import com.shopper.app.domain.model.Task
 import com.shopper.app.presentation.addition.model.AddTaskSideEffect
 import com.shopper.app.presentation.addition.model.AddTaskViewState
+import com.shopper.domain.DispatcherProvider
+import com.shopper.domain.interactor.AddProduct
+import com.shopper.domain.model.AddProductResult
+import com.shopper.domain.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -32,19 +31,21 @@ class AddTaskViewModel @Inject constructor(
             )
         )
 
-    fun addTaskWith(name: String) = intent {
-        val task = Task(title = name)
-        addProduct(task = task).collect { result ->
-            reduce {
-                when (result) {
-                    is AddProductResult.Pending -> AddTaskViewState.Pending
-                    is AddProductResult.Success -> AddTaskViewState.Added
-                    is AddProductResult.Failure -> AddTaskViewState.Idle
-                }
+    //todo why can't I post side effect in reduce block?
+    fun addProductWith(name: String) = intent {
+        reduce {
+            AddTaskViewState.Pending
+        }
+        val product = Product(name)
+        val result = addProduct.execute(product)
+        reduce {
+            when (result) {
+                is AddProductResult.Success -> AddTaskViewState.Added
+                is AddProductResult.Failure -> AddTaskViewState.Idle
             }
-            if (result is AddProductResult.Failure) {
-                postSideEffect(AddTaskSideEffect.EmptyFieldError)
-            }
+        }
+        if (result is AddProductResult.Failure) {
+            postSideEffect(AddTaskSideEffect.EmptyFieldError)
         }
     }
 }

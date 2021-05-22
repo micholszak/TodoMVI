@@ -1,10 +1,12 @@
-package com.shopper.app.domain
+package com.shopper.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class DefaultDispatcherProvider @Inject constructor() : DispatcherProvider {
+@Singleton
+internal class DefaultDispatcherProvider @Inject constructor() : DispatcherProvider {
 
     override val io: CoroutineDispatcher = Dispatchers.IO
     override val default: CoroutineDispatcher = Dispatchers.Default

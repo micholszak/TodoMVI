@@ -2,3 +2,4 @@ rootProject.name = "Todo"
 include ':app'
 include ':cache'
 include ':domain'
+include ':domain-test'

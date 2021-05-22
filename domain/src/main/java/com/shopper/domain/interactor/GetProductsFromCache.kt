@@ -1,24 +1,24 @@
-package com.shopper.app.domain.interactor
+package com.shopper.domain.interactor
 
-import com.shopper.app.domain.model.Task
 import com.shopper.cache.ProductCache
 import com.shopper.cache.model.CachedProduct
+import com.shopper.domain.model.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-open class GetTasks @Inject constructor(
+internal class GetProductsFromCache @Inject constructor(
     private val productCache: ProductCache,
-) {
+) : GetProducts {
 
-    operator fun invoke(): Flow<List<Task>> =
+    override fun execute(): Flow<List<Product>> =
         productCache.getAllProducts()
             .map(::mapEntities)
 
-    private fun mapEntities(entities: List<CachedProduct>): List<Task> =
+    private fun mapEntities(entities: List<CachedProduct>): List<Product> =
         entities.map { entity ->
-            Task(
-                title = entity.name
+            Product(
+                name = entity.name
             )
         }
 }

@@ -1,5 +1,6 @@
-package com.shopper.app.domain
+package com.shopper.domain.test
 
+import com.shopper.domain.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 

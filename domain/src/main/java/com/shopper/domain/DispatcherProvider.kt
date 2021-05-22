@@ -1,4 +1,4 @@
-package com.shopper.app.domain
+package com.shopper.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 
