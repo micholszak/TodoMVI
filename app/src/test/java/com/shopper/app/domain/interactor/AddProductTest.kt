@@ -2,11 +2,11 @@ package com.shopper.app.domain.interactor
 
 import android.database.SQLException
 import app.cash.turbine.test
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.doThrow
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import com.shopper.app.domain.TestDispatcherProvider
 import com.shopper.app.domain.model.AddProductResult
 import com.shopper.app.domain.model.Task

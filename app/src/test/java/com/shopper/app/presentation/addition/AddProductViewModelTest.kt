@@ -1,6 +1,6 @@
 package com.shopper.app.presentation.addition
 
-import com.nhaarman.mockitokotlin2.mock
+import org.mockito.kotlin.mock
 import com.shopper.app.domain.InstantTaskExecutorExtension
 import com.shopper.app.domain.TestDispatcherProvider
 import com.shopper.app.domain.interactor.AddProduct

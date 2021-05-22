@@ -24,6 +24,7 @@ ext {
             "com.google.dagger:hilt-android-gradle-plugin:$hilt_version",
             "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1",
     ]
+
     turbine = "app.cash.turbine:turbine:0.5.1"
 
     hiltAndroidDependencies = [
@@ -32,12 +33,12 @@ ext {
     hiltCompilers = [
             hiltCompiler: "com.google.dagger:hilt-compiler:$hilt_version",
             hiltAndroidCompiler: "com.google.dagger:hilt-android-compiler:$hilt_version",
-            hiltAndroidxCompiler: "androidx.hilt:hilt-compiler:$hilt_compiler_version"
+            hiltAndroidxCompiler: "androidx.hilt:hilt-compiler:$hilt_compiler_version",
     ]
 
     applicationDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
-            desugaring: "com.android.tools:desugar_jdk_libs:1.0.10"
+            desugaring: "com.android.tools:desugar_jdk_libs:1.0.10",
     ]
 
     lifecycleDependencies = [
@@ -47,20 +48,20 @@ ext {
             commonJava8: "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version",
             extensions: "androidx.lifecycle:lifecycle-extensions:2.2.0",
             fragment: "androidx.navigation:navigation-fragment-ktx:$nav_version",
-            navigationUI: "androidx.navigation:navigation-ui-ktx:$nav_version"
+            navigationUI: "androidx.navigation:navigation-ui-ktx:$nav_version",
     ]
 
     roomDependencies = [
             runtime: "androidx.room:room-runtime:$room_version",
             ktx: "androidx.room:room-ktx:$room_version",
-            compiler: "androidx.room:room-compiler:$room_version"
+            compiler: "androidx.room:room-compiler:$room_version",
     ]
 
 
     viewExtensionDependencies = [
             adapterDelegates: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:4.3.0",
             adapterDelegatesViewBinding: "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.0",
-            recyclerAnimators:"jp.wasabeef:recyclerview-animators:4.0.2"
+            recyclerAnimators:"jp.wasabeef:recyclerview-animators:4.0.2",
     ]
 
     coroutineDependencies = [
@@ -73,7 +74,7 @@ ext {
     androidxCoreDependencies = [
             core: "androidx.core:core-ktx:1.5.0",
             appCompat: "androidx.appcompat:appcompat:1.3.0",
-            constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.4"
+            constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.4",
     ]
 
     testDependencies = [
@@ -84,9 +85,9 @@ ext {
             coroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version",
             assertJ: "org.assertj:assertj-core:$assertj_version",
             turbine: turbine,
-            mockito: "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0",
             androidxArch: "androidx.arch.core:core-testing:2.1.0",
-            orbit: "org.orbit-mvi:orbit-test:$orbit_version"
+            orbit: "org.orbit-mvi:orbit-test:$orbit_version",
+            mockitoKotlin: "org.mockito.kotlin:mockito-kotlin:3.2.0",
     ]
 
     androidTestDependencies = [
@@ -94,6 +95,6 @@ ext {
             turbine: turbine,
             assertJ: "org.assertj:assertj-core:$assertj_version",
             jUnitExtension: "androidx.test.ext:junit:1.1.2",
-            espresso: "androidx.test.espresso:espresso-core:3.3.0"
+            espresso: "androidx.test.espresso:espresso-core:3.3.0",
     ]
 }

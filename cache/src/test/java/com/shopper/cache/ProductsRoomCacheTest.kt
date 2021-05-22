@@ -1,9 +1,6 @@
 package com.shopper.cache
 
 import app.cash.turbine.test
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import com.shopper.cache.internal.ProductDao
 import com.shopper.cache.internal.model.AddProductEntity
 import com.shopper.cache.internal.model.CheckedProductEntity
@@ -13,6 +10,9 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 internal class ProductsRoomCacheTest {
 

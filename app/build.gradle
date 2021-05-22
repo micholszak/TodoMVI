@@ -76,7 +76,7 @@ dependencies {
     testImplementation testDependencies.coroutines
     testImplementation testDependencies.assertJ
     testImplementation testDependencies.turbine
-    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
     testImplementation testDependencies.androidxArch
     testImplementation testDependencies.orbit
     testRuntimeOnly testDependencies.jupiterEngine
