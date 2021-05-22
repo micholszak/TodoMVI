@@ -31,7 +31,7 @@ class AddTaskViewModel @Inject constructor(
             )
         )
 
-    //todo why can't I post side effect in reduce block?
+    // todo why can't I post side effect in reduce block?
     fun addProductWith(name: String) = intent {
         reduce {
             AddTaskViewState.Pending

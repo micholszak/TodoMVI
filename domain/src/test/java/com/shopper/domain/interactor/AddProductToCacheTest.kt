@@ -1,9 +1,9 @@
 package com.shopper.domain.interactor
 
 import com.shopper.cache.ProductCache
-import com.shopper.domain.test.TestDispatcherProvider
 import com.shopper.domain.model.AddProductResult
 import com.shopper.domain.model.Product
+import com.shopper.domain.test.TestDispatcherProvider
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
