@@ -11,7 +11,7 @@ android {
     compileSdkVersion rootProject.targetSdkVersion
 
     defaultConfig {
-        applicationId "pl.olszak.todo"
+        applicationId "com.shopper"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
