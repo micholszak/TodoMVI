@@ -1,14 +1,14 @@
 package com.shopper.app.domain.interactor
 
 import android.database.SQLException
+import com.shopper.app.domain.DispatcherProvider
+import com.shopper.app.domain.model.AddProductResult
+import com.shopper.app.domain.model.Task
 import com.shopper.cache.ProductCache
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
-import com.shopper.app.domain.DispatcherProvider
-import com.shopper.app.domain.model.AddProductResult
-import com.shopper.app.domain.model.Task
 import javax.inject.Inject
 
 class AddProduct @Inject constructor(

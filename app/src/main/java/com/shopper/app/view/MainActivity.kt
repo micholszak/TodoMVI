@@ -2,8 +2,8 @@ package com.shopper.app.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.shopper.app.R
 import dagger.hilt.android.AndroidEntryPoint
-import pl.olszak.todo.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

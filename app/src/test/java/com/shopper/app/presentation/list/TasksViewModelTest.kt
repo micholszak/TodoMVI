@@ -4,18 +4,18 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.orbitmvi.orbit.assert
-import org.orbitmvi.orbit.test
 import com.shopper.app.domain.InstantTaskExecutorExtension
 import com.shopper.app.domain.TestDispatcherProvider
 import com.shopper.app.domain.interactor.GetTasks
 import com.shopper.app.domain.model.Task
 import com.shopper.app.presentation.list.model.TasksViewState
 import com.shopper.app.view.list.model.TaskViewItem
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.orbitmvi.orbit.assert
+import org.orbitmvi.orbit.test
 
 @ExtendWith(InstantTaskExecutorExtension::class)
 class TasksViewModelTest {

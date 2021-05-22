@@ -2,8 +2,8 @@ package com.shopper.app.view.list.adapter
 
 import android.widget.TextView
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
-import pl.olszak.todo.R
-import pl.olszak.todo.databinding.ViewHolderTaskBinding
+import com.shopper.app.R
+import com.shopper.app.databinding.ViewHolderTaskBinding
 import com.shopper.app.view.common.model.AdapterItem
 import com.shopper.app.view.list.model.TaskViewItem
 

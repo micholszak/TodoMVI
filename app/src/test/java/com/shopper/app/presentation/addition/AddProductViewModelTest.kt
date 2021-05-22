@@ -1,17 +1,17 @@
 package com.shopper.app.presentation.addition
 
 import com.nhaarman.mockitokotlin2.mock
+import com.shopper.app.domain.InstantTaskExecutorExtension
+import com.shopper.app.domain.TestDispatcherProvider
+import com.shopper.app.domain.interactor.AddProduct
+import com.shopper.app.presentation.addition.model.AddTaskSideEffect
+import com.shopper.app.presentation.addition.model.AddTaskViewState
 import com.shopper.cache.ProductCache
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.orbitmvi.orbit.assert
 import org.orbitmvi.orbit.test
-import com.shopper.app.domain.InstantTaskExecutorExtension
-import com.shopper.app.domain.TestDispatcherProvider
-import com.shopper.app.domain.interactor.AddProduct
-import com.shopper.app.presentation.addition.model.AddTaskSideEffect
-import com.shopper.app.presentation.addition.model.AddTaskViewState
 
 @ExtendWith(InstantTaskExecutorExtension::class)
 class AddProductViewModelTest {

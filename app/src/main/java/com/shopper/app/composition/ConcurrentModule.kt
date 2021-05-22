@@ -1,11 +1,11 @@
 package com.shopper.app.composition
 
+import com.shopper.app.domain.DefaultDispatcherProvider
+import com.shopper.app.domain.DispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import com.shopper.app.domain.DefaultDispatcherProvider
-import com.shopper.app.domain.DispatcherProvider
 import javax.inject.Singleton
 
 @Module

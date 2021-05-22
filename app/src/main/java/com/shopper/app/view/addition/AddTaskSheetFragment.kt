@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import pl.olszak.todo.R
-import pl.olszak.todo.databinding.FragmentAddTaskSheetBinding
+import com.shopper.app.R
+import com.shopper.app.databinding.FragmentAddTaskSheetBinding
 import com.shopper.app.presentation.addition.AddTaskViewModel
 import com.shopper.app.presentation.addition.model.AddTaskSideEffect
 import com.shopper.app.presentation.addition.model.AddTaskViewState
@@ -19,6 +17,8 @@ import com.shopper.app.view.common.binding.viewBinding
 import com.shopper.app.view.common.hideSoftInputFromDialog
 import com.shopper.app.view.common.showSoftInputInDialog
 import com.shopper.app.view.common.toast
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AddTaskSheetFragment : BottomSheetDialogFragment() {

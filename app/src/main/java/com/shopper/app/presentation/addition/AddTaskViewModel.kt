@@ -1,6 +1,12 @@
 package com.shopper.app.presentation.addition
 
 import androidx.lifecycle.ViewModel
+import com.shopper.app.domain.DispatcherProvider
+import com.shopper.app.domain.interactor.AddProduct
+import com.shopper.app.domain.model.AddProductResult
+import com.shopper.app.domain.model.Task
+import com.shopper.app.presentation.addition.model.AddTaskSideEffect
+import com.shopper.app.presentation.addition.model.AddTaskViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import org.orbitmvi.orbit.Container
@@ -9,12 +15,6 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import com.shopper.app.domain.DispatcherProvider
-import com.shopper.app.domain.interactor.AddProduct
-import com.shopper.app.domain.model.AddProductResult
-import com.shopper.app.domain.model.Task
-import com.shopper.app.presentation.addition.model.AddTaskSideEffect
-import com.shopper.app.presentation.addition.model.AddTaskViewState
 import javax.inject.Inject
 
 @HiltViewModel

@@ -7,14 +7,14 @@ import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.shopper.app.domain.TestDispatcherProvider
+import com.shopper.app.domain.model.AddProductResult
+import com.shopper.app.domain.model.Task
 import com.shopper.cache.ProductCache
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import com.shopper.app.domain.TestDispatcherProvider
-import com.shopper.app.domain.model.AddProductResult
-import com.shopper.app.domain.model.Task
 
 class AddProductTest {
     private val mockProductCache: ProductCache = mock()

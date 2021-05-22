@@ -1,5 +1,6 @@
 package com.shopper.app.view.common
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.Interpolator
@@ -13,7 +14,7 @@ interface Animation {
 class ScaleAnimation(
     private val scaleXFrom: Float = .7f,
     private val scaleYFrom: Float = .7f,
-    private val interpolator: Interpolator = OVERSHOOT,
+    private val animationInterpolator: Interpolator = OVERSHOOT,
     private val animationDurationMs: Long = 200
 ) : Animation {
 
@@ -22,12 +23,15 @@ class ScaleAnimation(
     }
 
     override fun animate(view: View) {
-        listOf(
-            ObjectAnimator.ofFloat(view, "scaleX", scaleXFrom, 1f),
-            ObjectAnimator.ofFloat(view, "scaleY", scaleYFrom, 1f)
-        ).forEach { animator ->
-            animator.interpolator = interpolator
-            animator.setDuration(animationDurationMs).start()
+        val animatorSet = AnimatorSet()
+        with(animatorSet) {
+            playTogether(
+                ObjectAnimator.ofFloat(view, "scaleX", scaleXFrom, 1f),
+                ObjectAnimator.ofFloat(view, "scaleY", scaleYFrom, 1f)
+            )
+            interpolator = animationInterpolator
+            duration = animationDurationMs
+            start()
         }
     }
 }

@@ -7,17 +7,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
-import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
-import kotlinx.coroutines.flow.collect
-import pl.olszak.todo.R
-import pl.olszak.todo.databinding.FragmentTaskListBinding
+import com.shopper.app.R
+import com.shopper.app.databinding.FragmentTaskListBinding
 import com.shopper.app.presentation.list.TasksViewModel
 import com.shopper.app.presentation.list.model.TasksViewState
 import com.shopper.app.view.common.ScaleAnimation
 import com.shopper.app.view.common.adapter.ItemAdapter
 import com.shopper.app.view.common.binding.viewBinding
 import com.shopper.app.view.list.adapter.createTaskDelegate
+import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class TaskListFragment : Fragment(R.layout.fragment_task_list) {

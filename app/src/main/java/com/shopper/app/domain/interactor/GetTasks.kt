@@ -1,10 +1,10 @@
 package com.shopper.app.domain.interactor
 
+import com.shopper.app.domain.model.Task
 import com.shopper.cache.ProductCache
 import com.shopper.cache.model.CachedProduct
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.shopper.app.domain.model.Task
 import javax.inject.Inject
 
 open class GetTasks @Inject constructor(
