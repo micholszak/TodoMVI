@@ -1,6 +1,5 @@
 package com.shopper.app.presentation.addition
 
-import org.mockito.kotlin.mock
 import com.shopper.app.domain.InstantTaskExecutorExtension
 import com.shopper.app.domain.TestDispatcherProvider
 import com.shopper.app.domain.interactor.AddProduct
@@ -10,6 +9,7 @@ import com.shopper.cache.ProductCache
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.kotlin.mock
 import org.orbitmvi.orbit.assert
 import org.orbitmvi.orbit.test
 

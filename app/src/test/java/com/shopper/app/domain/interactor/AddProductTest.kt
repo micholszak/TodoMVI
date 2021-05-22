@@ -2,11 +2,6 @@ package com.shopper.app.domain.interactor
 
 import android.database.SQLException
 import app.cash.turbine.test
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doThrow
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 import com.shopper.app.domain.TestDispatcherProvider
 import com.shopper.app.domain.model.AddProductResult
 import com.shopper.app.domain.model.Task
@@ -15,6 +10,11 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class AddProductTest {
     private val mockProductCache: ProductCache = mock()

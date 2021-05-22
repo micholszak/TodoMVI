@@ -1,15 +1,15 @@
 package com.shopper.app.domain.interactor
 
 import app.cash.turbine.test
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.whenever
 import com.shopper.cache.ProductCache
 import com.shopper.cache.model.CachedProduct
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class GetTasksTest {
     private val mockProductCache: ProductCache = mock()

@@ -1,9 +1,5 @@
 package com.shopper.app.presentation.list
 
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 import com.shopper.app.domain.InstantTaskExecutorExtension
 import com.shopper.app.domain.TestDispatcherProvider
 import com.shopper.app.domain.interactor.GetTasks
@@ -14,6 +10,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.orbitmvi.orbit.assert
 import org.orbitmvi.orbit.test
 
