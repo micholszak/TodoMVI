@@ -51,7 +51,7 @@ dependencies {
     testImplementation testDependencies.coroutines
     testImplementation testDependencies.assertJ
     testImplementation testDependencies.turbine
-    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
     testRuntimeOnly testDependencies.jupiterEngine
 
     androidTestImplementation androidTestDependencies.jUnit

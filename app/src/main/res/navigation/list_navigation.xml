@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/todo_list"
-        android:name="pl.olszak.todo.view.list.TaskListFragment"
+        android:name="com.shopper.app.view.list.TaskListFragment"
         android:label="fragment_todo_list"
         tools:layout="@layout/fragment_task_list">
 
@@ -18,7 +18,7 @@
 
     <dialog
         android:id="@+id/add_todo"
-        android:name="pl.olszak.todo.view.addition.AddTaskSheetFragment"
+        android:name="com.shopper.app.view.addition.AddTaskSheetFragment"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_task_sheet" />
 

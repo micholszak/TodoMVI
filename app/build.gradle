@@ -11,7 +11,7 @@ android {
     compileSdkVersion rootProject.targetSdkVersion
 
     defaultConfig {
-        applicationId "pl.olszak.todo"
+        applicationId "com.shopper"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
@@ -76,7 +76,7 @@ dependencies {
     testImplementation testDependencies.coroutines
     testImplementation testDependencies.assertJ
     testImplementation testDependencies.turbine
-    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
     testImplementation testDependencies.androidxArch
     testImplementation testDependencies.orbit
     testRuntimeOnly testDependencies.jupiterEngine
